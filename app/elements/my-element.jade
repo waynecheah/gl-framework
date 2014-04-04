@@ -1,0 +1,26 @@
+
+link(rel='import', href='../bower_components/polymer/polymer.html')
+
+polymer-element(name='my-element', attributes='crossBind owner')
+    template
+        h4 Polymer
+        p.
+          A new type of library for the web, built on top of Web Components,
+          and designed to leverage the evolving web platform on modern browsers.
+
+        h4 Data Binding
+        div Polymer: {{crossBind}}
+        div
+          input#cross-bind(value='{{crossBind}}', placeholder='data binding', ng-model='crossBind')
+
+        div#myEl(style='margin-top:20px')
+          span(style='font-style:italic; color:#808080;') loading...
+        span Hello from 
+          b my-element
+          | . This is 
+          span(style='background-color:#ffff00;') {{owner}}
+          |  first ever code on Shadow DOM.
+        div
+          label(for='owner') Author:
+          input#owner(value='{{owner}}', placeholder='Enter name...')
+          button(on-click='{{resetName}}') Reset Name
