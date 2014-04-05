@@ -235,7 +235,7 @@ gulp.task('watch', ['connect'], function () {
     gulp.watch('app/styles/**/*.scss', ['sass']).on('change', changed);
 
     // Watch .jade files
-    gulp.watch(['app/*.jade', 'app/elements/**/*.jade', 'views/**/*.jade'], ['jade'])
+    gulp.watch(['app/*.jade', 'app/elements/**/*.jade', 'app/views/**/*.jade'], ['jade'])
         .on('change', changed);
 
     // Watch .js files

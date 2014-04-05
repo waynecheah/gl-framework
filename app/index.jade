@@ -24,8 +24,18 @@ head
 body(ng-app='glApp')
   //[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]
 
-  // Add your site or application content here 
-  .container(ng-view='')
+  // Add your site or application content here
+  .container
+    .header(ng-controller='navigationCtrl')
+      ul.nav.nav-pills.pull-right
+        li(ng-class='{active:isActive(\'/\')}')
+          a(ng-href='#') Home
+        li(ng-class='{active:isActive(\'/about\')}')
+          a(ng-href='/#/about') About
+        li(ng-class='{active:isActive(\'/contact\')}')
+          a(ng-href='/#/contact') Contact
+      .clearfix
+    .body(ng-view='')
 
   // Google Analytics: change UA-XXXXX-X to be your site's ID 
   script.

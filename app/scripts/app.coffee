@@ -12,6 +12,12 @@ glApp = angular
     .when '/',
       templateUrl: 'views/main.html'
       controller: 'MainCtrl'
+    .when '/about',
+        templateUrl: 'views/about.html'
+        controller: 'MainCtrl'
+    .when '/contact',
+        templateUrl: 'views/main.html'
+        controller: 'MainCtrl'
     .otherwise
       redirectTo: '/'
     return

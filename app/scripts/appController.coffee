@@ -10,3 +10,12 @@ glApp.controller 'MainCtrl', ['$scope', ($scope) ->
     ]
     return
   ]
+
+glApp.controller 'navigationCtrl', ['$scope', '$location', ($scope, $location) ->
+    $scope.isActive = (path) ->
+      rs = path is $location.path()
+      console.log path+' is '+rs
+      rs
+    # END isActive
+    return
+  ]
