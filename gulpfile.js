@@ -164,6 +164,9 @@ gulp.task('connect', $.connect.server({
     livereload: true,
     open: { browser: 'Google Chrome Canary' }
 }));
+gulp.task('reload', function () {
+    return gulp.src('.tmp/index.html').pipe($.connect.reload());
+});
 
 // Inject Bower components
 gulp.task('bower-files', function(){
@@ -198,7 +201,7 @@ gulp.task('inject', function(){
         .pipe($.inject(
             gulp.src([
                 '.tmp/scripts/**/*.js',
-                '!.tmp/scripts/components/**/*.js',
+                '!.tmp/scripts/components/module/**/*.js',
                 '!.tmp/scripts/subsection/**/*.js',
                 '.tmp/elements/**/*.js',
                 '.tmp/styles/**/*.css',
@@ -218,7 +221,9 @@ gulp.task('watch', ['connect'], function () {
     // Watch for source files changes
     gulp.watch([
         '.tmp/*.html',
+        '!.tmp/index.html',
         '.tmp/elements/**/*.html',
+        '.tmp/views/**/*.html',
         '.tmp/styles/**/*.css',
         '.tmp/scripts/**/*.js',
         'app/images/**/*',
@@ -237,6 +242,11 @@ gulp.task('watch', ['connect'], function () {
     // Watch .jade files
     gulp.watch(['app/*.jade', 'app/elements/**/*.jade', 'app/views/**/*.jade'], ['jade'])
         .on('change', changed);
+
+    // watch index.html
+    gulp.watch('.tmp/index.html', function(e){
+        runSequence('inject', 'reload');
+    }).on('change', changed);
 
     // Watch .js files
     gulp.watch('app/scripts/**/*.js', ['scripts']);
