@@ -1,7 +1,8 @@
 'use strict'
 
-glApp.users = angula
-  .module 'glApp.users', [
+glApp.users =
+
+  angular.module 'glApp.users', [
     # module dependency
     #'glApp.users.factory'
   ]
@@ -17,7 +18,7 @@ glApp.users = angula
       .otherwise
           redirectTo: '/'
       return
-    ]
+  ]
 
   .controller 'LoginController', ['$scope', '$routeParams', ($scope, $routeParams) ->
     console.log $routeParams
