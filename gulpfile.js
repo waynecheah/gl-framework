@@ -3,6 +3,8 @@
 
 var gulp        = require('gulp');
 var runSequence = require('run-sequence');
+var app_dir     = 'app';
+var build_dir   = 'build';
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
@@ -81,31 +83,31 @@ gulp.task('styles', function () {
 
 // Jade
 gulp.task('jade', function() {
-    gulp.src('app/*.jade')
-        .pipe($.changed('.tmp', { extension: '.html' }))
+    gulp.src(app_dir+'/*.jade')
+        .pipe($.changed(build_dir, { extension: '.html' }))
         .pipe($.jade({
             //debug: true,
             pretty: true
         }))
-        .pipe(gulp.dest('.tmp/'))
+        .pipe(gulp.dest(build_dir+'/'))
         .pipe($.size({ showFiles: true }));
 
-    gulp.src('app/elements/**/*.jade')
-        .pipe($.changed('.tmp/elements', { extension: '.html' }))
+    gulp.src(app_dir+'/elements/**/*.jade')
+        .pipe($.changed(build_dir+'/elements', { extension: '.html' }))
         .pipe($.jade({
             //debug: true,
             pretty: true
         }))
-        .pipe(gulp.dest('.tmp/elements/'))
+        .pipe(gulp.dest(build_dir+'/elements/'))
         .pipe($.size({ showFiles: true }));
 
-    return gulp.src('app/views/**/*.jade')
-        .pipe($.changed('.tmp/views', { extension: '.html' }))
+    return gulp.src(app_dir+'/scripts/**/*.jade')
+        .pipe($.changed(build_dir+'/scripts', { extension: '.html' }))
         .pipe($.jade({
             //debug: true,
             pretty: true
         }))
-        .pipe(gulp.dest('.tmp/views/'))
+        .pipe(gulp.dest(build_dir+'/scripts/'))
         .pipe($.size({ showFiles: true }));
 });
 
@@ -223,7 +225,7 @@ gulp.task('watch', ['connect'], function () {
         '.tmp/*.html',
         '!.tmp/index.html',
         '.tmp/elements/**/*.html',
-        '.tmp/views/**/*.html',
+        '.tmp/scripts/**/*.html',
         '.tmp/styles/**/*.css',
         '.tmp/scripts/**/*.js',
         'app/images/**/*',
@@ -240,7 +242,7 @@ gulp.task('watch', ['connect'], function () {
     gulp.watch('app/styles/**/*.scss', ['sass']).on('change', changed);
 
     // Watch .jade files
-    gulp.watch(['app/*.jade', 'app/elements/**/*.jade', 'app/views/**/*.jade'], ['jade'])
+    gulp.watch(['app/*.jade', 'app/elements/**/*.jade', 'app/scripts/**/*.jade'], ['jade'])
         .on('change', changed);
 
     // watch index.html
