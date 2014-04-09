@@ -1,0 +1,41 @@
+mixin ngValidate(form, name)
+  - var cls = "{'has-error': "+form+'.'+name+'.$invalid && ' +form+'.'+name+'.$dirty'
+  - cls = cls+", 'has-success': "+form+'.'+name+'.$valid && '+form+'.'+name+'.$dirty'
+  - cls = cls+", 'bg-danger':"+form+'.'+name+'.error}'
+  div.form-group(ng-class!=cls, class='has-feedback')
+    if block
+      block
+//- END ngInput
+
+mixin ngInput(label, type, name, model)
+  //- var trigger = "{{ {true:'mouseleave', false:'null'}[("+form+"."+name+".$invalid && "+form+"."+name+".$dirty)] }}"
+
+  label.control-label(for='')= label
+  input.form-control(
+    type=type, name=name, ng-model=model,
+    ng-change="isValid('#{name}')", ng-blur="validate('#{name}')",
+    ng-pattern!=attributes.pattern, maxlength!=attributes.maxlength,
+    ng-maxlength!=attributes.maxlength, ng-minlength!=attributes.minlength,
+    required!=attributes.required
+  )
+  span.form-control-feedback(
+    ng-class="{ 'icon-check': #{form}.#{name}.$valid, 'icon-times': #{form}.#{name}.error }"
+  )
+//- END ngInput
+
+
+- var form = 'loginForm'
+
+form.form(name=form, ng-submit='login()')
+  .alert(class='alert-danger', ng-show='invalidCredentials') Wrong credentials
+  
+  +ngValidate(form, 'email')
+    +ngInput('Email', 'email', 'email', 'user.email')(minlength='5', maxlength='10', required='')
+    p.help-block(ng-show='#{form}.email.error') Wrong email
+
+  +ngValidate(form, 'password')
+    +ngInput('Password', 'password', 'password', 'user.password')(pattern='.{6,20}', required='')
+    p.help-block(ng-show='#{form}.password.error') Invalid password
+
+  .form-group
+    button.btn(type='submit', class='btn-primary', ng-disabled='#{form}.$invalid') Log In

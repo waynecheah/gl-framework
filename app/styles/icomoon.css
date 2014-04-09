@@ -1,0 +1,68 @@
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot?-oqdgh6');
+    src:url('../fonts/icomoon.eot?#iefix-oqdgh6') format('embedded-opentype'),
+    url('../fonts/icomoon.woff?-oqdgh6') format('woff'),
+    url('../fonts/icomoon.ttf?-oqdgh6') format('truetype'),
+    url('../fonts/icomoon.svg?-oqdgh6#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 15px;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-check:before {
+    content: "\f00c";
+}
+.icon-times:before {
+    content: "\f00d";
+}
+.icon-plus-circle:before {
+    content: "\f055";
+}
+.icon-minus-circle:before {
+    content: "\f056";
+}
+.icon-times-circle:before {
+    content: "\f057";
+}
+.icon-check-circle:before {
+    content: "\f058";
+}
+.icon-question-circle:before {
+    content: "\f059";
+}
+.icon-info-circle:before {
+    content: "\f05a";
+}
+.icon-times-circle-o:before {
+    content: "\f05c";
+}
+.icon-check-circle-o:before {
+    content: "\f05d";
+}
+.icon-ban:before {
+    content: "\f05e";
+}
+.icon-exclamation-circle:before {
+    content: "\f06a";
+}
+.icon-warning:before {
+    content: "\f071";
+}
+.icon-check-square:before {
+    content: "\f14a";
+}

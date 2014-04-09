@@ -1,6 +1,6 @@
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
-//@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 
 // bower:scss
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
@@ -93,5 +93,30 @@ body {
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
+    }
+}
+
+/* Bootstrap Overwrite */
+form.form {
+    .alert {
+        margin-top: 10px;
+    }
+    .has-feedback {
+        .form-control-feedback {
+            top: 30px;
+        }
+    }
+    .has-error {
+        .form-control-feedback {
+            color: #a94442;
+        }
+    }
+    .form-group {
+        padding: 5px;
+        
+        .help-block{
+            padding-left: 5px;
+            margin-bottom: 0;
+        }
     }
 }

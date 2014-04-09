@@ -201,9 +201,11 @@ gulp.task('inject', function(){
                 '!'+build_dir+'/scripts/subsection/**/*.js',
                 build_dir+'/elements/**/*.js',
                 build_dir+'/styles/**/*.css',
+                app_dir+'/styles/**/*.css',
+                '!'+app_dir+'/styles/404.css',
                 build_dir+'/elements/**/*.html'
             ], { read: false }),
-            { ignorePath: build_dir, addRootSlash: false }
+            { ignorePath: [app_dir, build_dir], addRootSlash: false }
         ))
         .pipe(gulp.dest(build_dir));
 });

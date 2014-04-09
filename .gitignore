@@ -2,6 +2,5 @@ node_modules
 build
 dist
 .idea
-.tmp
 .sass-cache
 app/bower_components
