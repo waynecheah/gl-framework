@@ -30,11 +30,11 @@ form.form(name=form, ng-submit='login()')
   .alert(class='alert-danger', ng-show='invalidCredentials') Wrong credentials
   
   +ngValidate(form, 'email')
-    +ngInput('Email', 'email', 'email', 'user.email')(minlength='5', maxlength='10', required='')
-    p.help-block(ng-show='#{form}.email.error') Wrong email
+    +ngInput('Email', 'email', 'email', 'user.email')(minlength='6', maxlength='10', required='')
+    p.help-block(ng-show='#{form}.email.error') Wrong email. {{error.email}}
 
   +ngValidate(form, 'password')
-    +ngInput('Password', 'password', 'password', 'user.password')(pattern='.{6,20}', required='')
+    +ngInput('Password', 'password', 'password', 'user.password')(pattern='/^.{6,50}$/', required='')
     p.help-block(ng-show='#{form}.password.error') Invalid password
 
   .form-group

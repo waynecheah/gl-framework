@@ -26,24 +26,31 @@ glApp.users =
         $scope.password = 'password'
         return
     ]
-    .controller 'LoginCtrl', ['$scope', 'auth', '$location', ($scope, auth, $location) ->
+    .controller 'LoginCtrl', ['$scope', 'validation', 'auth', '$location', ($scope, validation, auth, $location) ->
         fm = 'loginForm' # form name
 
-        $scope.validate = (fd) -> # call when trigger on blur
-            if $scope[fm][fd].$dirty
-                # more validation checking goes here
-                # $scope[fm][fd].error = validate $scope, fm, fd
+        $scope.rules = {
+            email: {
+                required: true
+                email: true
+                minlength: 6
+                maxlength: 50
+            },
+            password: {
+                required: true,
+                pattern: '/^.{6,50}$/'
+            }
+        }
+        $scope.error = {}
 
-                if $scope[fm][fd].$invalid
-                    $scope[fm][fd].error = yes
-                else if $scope[fm][fd].$valid
-                    $scope[fm][fd].error = no
-            return
+        validation.init $scope, fm
+
+        $scope.validate = (fd) -> # call when trigger on blur
+            validation.validate fd
         # END validate
 
         $scope.isValid = (fd) -> # call when detect change instantly
-            $scope[fm][fd].error = no if $scope[fm][fd].$valid
-            return
+            validation.isValid fd
         # END isValid
 
         $scope.login = ->
