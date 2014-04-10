@@ -24,4 +24,4 @@ angular.module 'glApp'
 
         return
     # END link
-# END directive
+# END glFocus

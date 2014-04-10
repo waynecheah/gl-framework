@@ -1,6 +1,6 @@
 
 Polymer 'my-element',
-    crossBind: 'Default Data'
+    crossbind: 'Default Data'
     onwer: 'Wayne Cheah'
     loaded: no
 
@@ -15,16 +15,16 @@ Polymer 'my-element',
         return
     # END ready
 
-    crossBindChanged: -> # quick fix to bind Polymer data back to Angular
-        elem   = document.querySelector 'input[ng-model="crossBind"]'
+    crossbindChanged: -> # quick fix to bind Polymer data back to Angular
+        elem   = document.querySelector 'input[ng-model="crossbind"]'
         scope  = angular.element(elem).scope()
-        #scope  = angular.element('[ng-model="crossBind"]:first').scope()
-        newVal = @crossBind
+        #scope  = angular.element('[ng-model="crossbind"]:first').scope()
+        newVal = @crossbind
         scope.$apply ->
-            scope.crossBind = newVal
+            scope.crossbind = newVal
             return
         return
-    # END crossBindChanged
+    # END crossbindChanged
 
     ownerChanged: ->
         return unless @loaded

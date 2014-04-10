@@ -3,7 +3,7 @@
 glApp
 
     .controller 'MainCtrl', ['$scope', ($scope) ->
-        $scope.crossBind = 'Default Angular'
+        $scope.crossbind = 'Default ng data'
         $scope.pageTitle = 'Angular + Polymer'
         $scope.awesomeThings = [
             'HTML5 Boilerplate'

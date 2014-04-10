@@ -1,7 +1,7 @@
 
 link(rel='import', href='../bower_components/polymer/polymer.html')
 
-polymer-element(name='my-element', attributes='crossBind owner')
+polymer-element(name='my-element', attributes='crossbind owner')
     template
         h4 Polymer
         p.
@@ -9,9 +9,9 @@ polymer-element(name='my-element', attributes='crossBind owner')
           and designed to leverage the evolving web platform on modern browsers.
 
         h4 Data Binding
-        div Polymer: {{crossBind}}
+        div Polymer: {{crossbind}}
         div
-          input#cross-bind(value='{{crossBind}}', placeholder='data binding', ng-model='crossBind')
+          input#cross-bind(value='{{crossbind}}', placeholder='data binding')
 
         div#myEl(style='margin-top:20px')
           span(style='font-style:italic; color:#808080;') loading...
