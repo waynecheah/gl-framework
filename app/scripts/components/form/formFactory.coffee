@@ -19,7 +19,10 @@ angular.module 'glApp'
             },
             password: {
                 required: true,
-                pattern: '/^.{6,50}$/'
+                regexp: {
+                    pattern: '^.{6,50}$'
+                    onError: 'Between 6 to 50 characters'
+                }
             }
         }
 
@@ -63,10 +66,16 @@ angular.module 'glApp'
                         unless re.test vl
                             se.invalid = er = yes
                             se.err[fd] = 'Invalid email address'
+                    when 'regexp'
+                        return unless val and 'pattern' of val is true
+                        re = new RegExp val.pattern
+                        unless re.test vl
+                            er         = yes
+                            se.err[fd] = val.onError
                 if er
                     se["#{fd}Cls"]  = 'has-error bg-danger'
                     se["#{fd}Icon"] = 'icon-times'
-                console.log rule+' = '+val
+                #console.log rule+' = '+val
             return
 
         se[fm][fd].$invalid = er if er
@@ -106,19 +115,27 @@ angular.module 'glApp'
                         return unless val
                         re = new RegExp /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/
                         er = yes unless re.test vl
+                    when 'regexp'
+                        return unless val and 'pattern' of val is true
+                        re = new RegExp val.pattern
+                        er = yes unless re.test vl
                 return
             return
 
-        se[fm][fd].$invalid = er if er
-        se.invalid          = if se[fm].$valid then no else yes
+        se[fm][fd].$invalid = er
+        se[fm][fd].$valid   = !er
 
-        if se[fm][fd].$invalid
+        if se[fm][fd].$invalid # when error found in field
             se["#{fd}Cls"]  = 'has-error'
             se["#{fd}Icon"] = 'icon-times'
+            se[fm].$valid   = no
+            se[fm].$invalid = yes
         else if se[fm][fd].$valid
             se["#{fd}Cls"]  = 'has-success'
             se["#{fd}Icon"] = 'icon-check'
             se.err[fd]      = ''
+
+        se.invalid = no if se[fm].$valid # form validated!
 
         return
     # END isValid
