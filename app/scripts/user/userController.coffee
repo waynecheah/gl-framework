@@ -10,8 +10,8 @@ glApp.users =
     .config ['$routeProvider', ($routeProvider) ->
         $routeProvider
         .when '/users/login',
-            templateUrl: 'scripts/user/login.html'
-            controller: 'LoginCtrl'
+            templateUrl: 'scripts/user/signin.html'
+            controller: 'SigninCtrl'
         .when '/users/register',
             templateUrl: 'scripts/users/register.html'
             controller: 'RegisterCtrl'
@@ -26,22 +26,23 @@ glApp.users =
         $scope.password = 'password'
         return
     ]
-    .controller 'LoginCtrl', ['$scope', 'validation', 'auth', '$location', ($scope, validation, auth, $location) ->
+    .controller 'SigninCtrl', ['$scope', 'validation', 'auth', '$location', ($scope, validation, auth, $location) ->
         fm = 'loginForm' # form name
 
-        $scope.rules = {
-            email: {
-                required: true
-                email: true
-                minlength: 6
-                maxlength: 50
-            },
-            password: {
-                required: true,
-                pattern: '/^.{6,50}$/'
-            }
-        }
         $scope.error = {}
+
+        validation.init $scope, fm
+
+        $scope.validate = (fd) -> # call when trigger on blur
+            validation.validate fd
+        # END validate
+
+        $scope.isValid = (fd) -> # call when detect change instantly
+            validation.isValid fd
+        # END isValid
+    ]
+    .controller 'LoginCtrl', ['$scope', 'validation2', 'auth', '$location', ($scope, validation, auth, $location) ->
+        fm = 'loginForm' # form name
 
         validation.init $scope, fm
 
@@ -68,6 +69,8 @@ glApp.users =
 
         error = ->
             $scope.invalidCredentials = true
+            $scope.onAlert      = true
+            $scope.alertMessage = 'Wrong credentials'
             return
         # END error
         return

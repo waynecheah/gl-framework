@@ -25,3 +25,25 @@ angular.module 'glApp'
         return
     # END link
 # END glFocus
+
+.directive 'glForm', ($compile) ->
+    restrict: 'E'
+    replace: true
+    templateUrl: 'scripts/user/signin.html'
+    controller: ($scope) ->
+        $scope.login = ->
+            console.log 'submited'
+        return
+    compile: (element, attrs) ->
+        attrs.$set 'ng-submit', 'login()'
+        content = angular.element '<div ng-click="login()">Test</div>'
+        content.append(element.contents())
+        element.replaceWith content
+        return
+#    link: (scope, elem, attrs) ->
+#        attrs.$set 'ng-click', 'login()'
+#        angular.forEach elem.find('input'), (el) ->
+#            console.log el
+#            return
+#        return
+# END glForm
