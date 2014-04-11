@@ -1,0 +1,38 @@
+mixin dv(name)
+  - var cls = "{ 'has-error': "+'warn.'+name
+  - cls    += ", 'has-success': "+'ok.'+name
+  - cls    += ", 'bg-danger': "+'err.'+name+' }'
+  div.form-group.has-feedback(ng-class!=cls)
+//- END dv
+mixin input(type, name, model)
+  input.form-control(
+    type=type, name=name, ng-model="#{model}.#{name}",
+    ng-change="isValid('#{name}')", ng-blur="validate('#{name}')"
+  )
+//- END ngInput
+
+- var form = 'loginForm'
+- var model = 'user'
+
+form.form(name=form, ng-submit='login()')
+  .alert.alert-danger(ng-show='onAlert') {{alertMessage}}
+
+  //- var name   = 'email'
+  //- var model = 'user.'+name
+  //- var change = "isValid('"+name+"')"
+  //- var blur   = "validate('"+name+"')"
+  .form-group.has-feedback(ng-class='emailCls')
+    label.control-label(for='') Email.
+    +input('email', 'email', model)
+    //-input.form-control(type='email', name=name, ng-model=model, ng-change=change, ng-blur=blur)
+    span.form-control-feedback(ng-class='emailIcon')
+    p.help-block {{err.email}}
+
+  .form-group.has-feedback(ng-class='passwordCls')
+    label.control-label(for='') Password
+    +input('password', 'password', model)
+    span.form-control-feedback(ng-class='passwordIcon')
+    p.help-block {{err.password}}
+
+  .form-group
+    button.btn.btn-primary(type='submit', ng-disabled='invalid') Log In
