@@ -6,15 +6,15 @@ angular.module 'glApp'
     formRules  = {}
     showingErr = {}
 
-    validateField = (scope, rules, field, value) ->
+    validateField = (rules, field, value) ->
         rs =
             err: no
             msg: null
 
-        return if field of rules is false # validation rule does not applies to this field
+        return null if field of rules is false # validation rule does not applies to this field
 
         angular.forEach rules[field], (ruleVal, rule) -> # loop all rules
-            return unless er is no # skip further checking if this field has already found error
+            return unless rs.err is no # skip further checking if this field has already found error
 
             switch rule
                 when 'required'
@@ -49,9 +49,9 @@ angular.module 'glApp'
 
     validateForm = ->
         valid = yes
-        angular.forEach formRules, (hasValid) ->
+        angular.forEach formRules, (hasValidate) ->
             return if not valid
-            valid = no if hasValid is false
+            valid = no if hasValidate is false
             return
         valid
     # END validateForm
@@ -78,18 +78,19 @@ angular.module 'glApp'
                 }
             }
         }
-#        $http.get '/users/model/rules.json'
+#        $http.get '/scripts/user/userModel.json'
 #        .success (data, status, headers, config) ->
+#            console.warn data
 #            s = true
 #            return
 #        .error (data, status, headers, config) ->
 #            e = true
 #            return
-#
-#        angular.forEach @rules, (rules, field) ->
-#            formRules[field]  = false
-#            showingErr[field] = no
-#            return
+
+        angular.forEach @rules, (rules, field) ->
+            formRules[field]  = false
+            showingErr[field] = no
+            return
 
         @scope.onAlert = no
         @scope.err     = {}
@@ -102,55 +103,31 @@ angular.module 'glApp'
 
         se = @scope
         fm = @form
-        el = document.querySelector "form[name=#{fm}] input[name=#{fd}]"
-        vl = el.value # se.user[fd]
         er = no
 
-        if fd of @rules is true # rule applies to this field
-            angular.forEach @rules[fd], (val, rule) ->
-                return unless er is no # skip further checking if error on this field has found
-                se.err[fd] = ''
-                switch rule
-                    when 'required'
-                        return unless val
-                        if vl.length is 0
-                            se.invalid = er = yes
-                            se.err[fd] = "This field is required"
-                    when 'minlength'
-                        if vl.length < val
-                            se.invalid = er = yes
-                            se.err[fd] = "Too short. Minimum #{val} characters"
-                    when 'maxlength'
-                        if vl.length > val
-                            se.invalid = er = yes
-                            se.err[fd] = "Too long. Maximum #{val} characters"
-                    when 'email'
-                        return unless val
-                        re = new RegExp /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/
-                        unless re.test vl
-                            se.invalid = er = yes
-                            se.err[fd] = 'Invalid email address'
-                    when 'regexp'
-                        return unless val and 'pattern' of val is true
-                        re = new RegExp val.pattern
-                        unless re.test vl
-                            er         = yes
-                            se.err[fd] = val.onError
-                #console.log rule+' = '+val
-                return
+        if angular.isUndefined se.user[fd]
+            value = document.querySelector("form[name=#{fm}] input[name=#{fd}]").value
+        else
+            value = se.user[fd]
+
+        fail = validateField @rules, fd, value
+        if fail
+            se.invalid = er = fail.err
+            se.err[fd] = fail.msg
 
         se[fm][fd].$invalid = er
         se[fm][fd].$valid   = !er
 
-        if se[fm][fd].$dirty
-            if se[fm][fd].$invalid
-                showingErr[fd]  = yes
-                se["#{fd}Cls"]  = 'has-error bg-danger'
-                se["#{fd}Icon"] = 'icon-times'
-            else if se[fm][fd].$valid
-                showingErr[fd]  = no
-                se["#{fd}Cls"]  = 'has-success'
-                se["#{fd}Icon"] = 'icon-check'
+        if se[fm][fd].$invalid
+            showingErr[fd]  = yes
+            formRules[fd]   = false if fd of formRules is true
+            se["#{fd}Cls"]  = 'has-error bg-danger'
+            se["#{fd}Icon"] = 'icon-times'
+        else if se[fm][fd].$valid
+            showingErr[fd]  = no
+            formRules[fd]   = true if fd of formRules is true
+            se["#{fd}Cls"]  = 'has-success'
+            se["#{fd}Icon"] = 'icon-check'
 
         se[fm].$valid = validateForm()
         if se[fm].$valid # form is validated!
@@ -166,30 +143,16 @@ angular.module 'glApp'
     isValid: (fd) ->
         se = @scope
         fm = @form
-        el = document.querySelector "form[name=#{fm}] input[name=#{fd}]"
-        vl = el.value
         er = no
 
-        if fd of @rules is true # rule applies to this field
-            angular.forEach @rules[fd], (val, rule) -> # loop all rules
-                return unless er is no # skip further checking if error on this field has found
-                switch rule
-                    when 'required'
-                        return unless val # empty value means optional field
-                        er = yes if vl.length is 0
-                    when 'minlength'
-                        er = yes if vl.length < val
-                    when 'maxlength'
-                        er = yes if vl.length > val
-                    when 'email'
-                        return unless val # empty values means do not apply email validation check
-                        re = new RegExp /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/
-                        er = yes unless re.test vl
-                    when 'regexp'
-                        return unless val and 'pattern' of val is true # custom check via RegExp
-                        re = new RegExp val.pattern
-                        er = yes unless re.test vl
-                return
+        if angular.isUndefined se.user[fd]
+            value = document.querySelector("form[name=#{fm}] input[name=#{fd}]").value
+        else
+            value = se.user[fd]
+
+        fail = validateField @rules, fd, value
+
+        se.invalid = er = fail.err if fail
 
         se[fm][fd].$invalid = er
         se[fm][fd].$valid   = !er
