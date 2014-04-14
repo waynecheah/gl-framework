@@ -26,7 +26,7 @@ mixin ngInput(label, type, name, model)
 
 - var form = 'loginForm'
 
-form.form(name=form, ng-submit='login()')
+form.form(name=form, ng-submit='login()', novalidate='')
   .alert(class='alert-danger', ng-show='invalidCredentials') Wrong credentials
   
   +ngValidate(form, 'email')

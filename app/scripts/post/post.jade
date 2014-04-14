@@ -1,0 +1,59 @@
+mixin input(type, name, model)
+  input.form-control(
+  type=type, name=name, ng-model="#{model}.#{name}",
+  ng-change="isValid('#{name}')", ng-blur="validate('#{name}')"
+  )
+//- END ngInput
+
+
+h1(ng-show='posts.length') Posts
+table.table.table-striped
+  thead
+    th Author
+    th Title
+    th Content
+    th Creation
+    th Last Update
+    th Action
+  tbody
+    tr(ng-repeat='post in posts')
+      td {{post.author}}
+      td {{post.title}}
+      td {{post.content}}
+      td {{post.creation}}
+      td {{post.lastUpdate}}
+      td
+        button.btn(ng-click='activePost(post)') Edit
+        button.btn.btn-danger(ng-click='delete(post)') Delete
+
+button.btn(ng-if='!editing') New Post
+button.btn(ng-if='editing') Edit Post
+
+
+- var form = 'mypost'
+- var model = 'post'
+
+form(name=form, ng-submit='save(post)', novalidate='')
+  .alert.alert-danger(ng-show='onAlert') {{alertMessage}}
+
+  .form-group.has-feedback(ng-class='authorCls')
+    label.control-label(for='') Author
+    +input('author', 'author', model)
+    span.form-control-feedback(ng-class='authorIcon')
+    p.help-block {{err.author}}
+
+  .form-group.has-feedback(ng-class='titleCls')
+    label.control-label(for='') Title
+    +input('text', 'title', model)
+    span.form-control-feedback(ng-class='titleIcon')
+    p.help-block {{err.title}}
+
+  .form-group.has-feedback(ng-class='contentCls')
+    label.control-label(for='') Content
+    +input('text', 'content', model)
+    span.form-control-feedback(ng-class='contentIcon')
+    p.help-block {{err.content}}
+
+  button.btn.btn-primary(type='submit') Submit
+
+button.btn.btn-success(ng-if='editing', ng-click='newPost()') New Post

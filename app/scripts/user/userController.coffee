@@ -44,16 +44,6 @@ glApp.users =
     .controller 'LoginCtrl', ['$scope', 'validation2', 'auth', '$location', ($scope, validation, auth, $location) ->
         fm = 'loginForm' # form name
 
-        validation.init $scope, fm
-
-        $scope.validate = (fd) -> # call when trigger on blur
-            validation.validate fd
-        # END validate
-
-        $scope.isValid = (fd) -> # call when detect change instantly
-            validation.isValid fd
-        # END isValid
-
         $scope.login = ->
             if $scope[fm].$valid
                 promise = auth.login $scope.user
