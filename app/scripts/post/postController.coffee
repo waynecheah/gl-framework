@@ -2,27 +2,27 @@
 
 glApp.posts =
 
-    angular.module 'glApp.posts', []
+    angular.module 'glApp.posts', [
+    ]
 
     .config ['$routeProvider', ($routeProvider) ->
         $routeProvider
         .when '/posts',
-                templateUrl: 'scripts/post/post.html'
-                controller: 'PostCtrl'
-        .otherwise
-                redirectTo: '/'
+            templateUrl: 'scripts/post/post.html'
+            controller: 'PostCtrl'
         return
     ]
 
     .provider 'Post', ->
-        @$get = ['$resource', ($resource) -> 
-            $resource '/post/:_id', {},
-                update:
-                    method: 'PUT'
+        @$get = ['$resource', ($resource) ->
+            Post = $resource 'http://localhost:9000/post/:_id', {},
+                       update:
+                           method: 'PUT'
+            Post
         ]
         return
 
-    .controller 'PostCtrl', ($scope, $route, Post) ->
+    .controller 'PostCtrl', ['$scope', '$route', 'Post', ($scope, $route, Post) ->
         $scope.post  = new Post()
         $scope.posts = Post.query() # method GET | isArray
 
@@ -48,7 +48,7 @@ glApp.posts =
                     $scope.posts.push res
                     return
 
-            $scope.editing = false;
+            $scope.editing = false
             $scope.post    = new Post()
             return
         # END save
@@ -60,3 +60,4 @@ glApp.posts =
         # END delete
 
         return
+    ]

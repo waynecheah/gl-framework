@@ -7,6 +7,7 @@ glApp =
         'ngSanitize'
         'ngRoute'
         'ui.bootstrap'
+        'glApp.posts'
         'glApp.users'
     ]
 
@@ -17,6 +18,7 @@ glApp =
             config
 
     .config ['$httpProvider', ($httpProvider) ->
+        delete $httpProvider.defaults.headers.common['X-Requested-With']
         $httpProvider.interceptors.push 'authInterceptor'
         return
     ]

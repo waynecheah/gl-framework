@@ -15,8 +15,6 @@ glApp.users =
         .when '/users/register',
             templateUrl: 'scripts/users/register.html'
             controller: 'RegisterCtrl'
-        .otherwise
-            redirectTo: '/'
         return
     ]
 
