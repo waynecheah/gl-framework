@@ -200,6 +200,7 @@ gulp.task('inject', function(){
                 '!'+build_dir+'/scripts/components/module/**/*.js',
                 '!'+build_dir+'/scripts/subsection/**/*.js',
                 build_dir+'/elements/**/*.js',
+                '!'+build_dir+'/styles/main.css',
                 build_dir+'/styles/**/*.css',
                 app_dir+'/styles/**/*.css',
                 '!'+app_dir+'/styles/404.css',

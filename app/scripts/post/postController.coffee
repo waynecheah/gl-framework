@@ -15,10 +15,9 @@ glApp.posts =
 
     .provider 'Post', ->
         @$get = ['$resource', ($resource) ->
-            Post = $resource 'http://localhost:9000/post/:_id', {},
-                       update:
-                           method: 'PUT'
-            Post
+            $resource 'http://localhost:3000/post/:_id', {},
+                update:
+                    method: 'PUT'
         ]
         return
 

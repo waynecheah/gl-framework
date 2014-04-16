@@ -6,6 +6,7 @@ glApp =
         'ngResource'
         'ngSanitize'
         'ngRoute'
+        'placeholders'
         'ui.bootstrap'
         'glApp.posts'
         'glApp.users'

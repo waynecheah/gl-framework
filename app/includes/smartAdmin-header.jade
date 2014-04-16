@@ -1,0 +1,69 @@
+// HEADER 
+header#header
+  #logo-group
+    span#logo
+      img(src='images/logo.png', alt='GL-Framework')
+    span#activity.activity-dropdown
+      i.fa.fa-user
+        b.badge 21
+    .ajax-dropdown
+  // Project dropdown 
+  #project-context
+    span.label Projects:
+    span#project-selector.popover-trigger-element.dropdown-toggle(data-toggle='dropdown')
+      | Recent projects
+      i.fa.fa-angle-down
+    ul.dropdown-menu
+      li
+        a(href='javascript:;') Online e-merchant management system - attaching integration with the iOS
+      li
+        a(href='javascript:;') Notes on pipeline upgradee
+      li
+        a(href='javascript:;') Assesment Report for merchant account
+      li.divider
+      li
+        a(href='javascript:;')
+          i.fa-.fa-power-off Clear
+  // pulled right: nav area 
+  .pull-right
+    #hide-menu.btn-header.pull-right
+      span
+        a(href='javascript:;', title='Collapse Menu')
+          i.fa.fa-reorder
+    #logout.btn-header.transparent.pull-right
+      span
+        a(href='javascript:;', title='Sign Out', data-logout-msg='"You can improve your security further after logging out by closing this opened browser')
+          i.fa.fa-sign-out
+    #search-mobile.btn-header.transparent.pull-right
+      span
+        a(href='javascript:;', title='Search')
+          i.fa.fa-search
+    form.header-search.pull-right(action='#ajax/search.html')
+      input#search-fld(name='param', placeholder='Find reports and more')
+      button(type='submit', )
+        i.fa.fa-search
+      a#cancel-search-js(href='javascript:;', title='Cancel Search')
+        i.fa.fa-times
+    #fullscreen.btn-header.transparent.pull-right
+      span
+        a(href='javascript:launchFullscreen(document.documentElement);', title='Full Screen')
+          i.fa.fa-fullscreen
+    ul.header-dropdown-list.hidden-xs
+      li
+        a.dropdown-toggle(href='#', data-toggle='dropdown')
+          img(alt='', src='images/flags/us.png')
+          span US
+            i.fa.fa-angle-down
+        ul.dropdown-menu.pull-right
+          li.active
+            a(href='javascript:;')
+              img(alt='', src='images/flags/us.png')
+              | US
+          li
+            a(href='javascript:;')
+              img(alt='', src='images/flags/cn.png')
+              | Cn
+          li
+            a(href='javascript:;')
+              img(alt='', src='images/flags/my.png')
+              | MY

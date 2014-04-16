@@ -1,0 +1,32 @@
+// Left panel : Navigation area 
+aside#left-panel
+  // User info 
+  .login-info
+    span
+      a#show-shortcut(href='javascript:;')
+        img.online(src='images/avatars/sunny.png', alt='me')
+        span Wayne Cheah
+        i.fa.fa-angle-down
+  // NAVIGATION : This navigation is also responsive
+  nav
+    ul
+      li
+        a(href='ajax/dashboard.html', title='Dashboard')
+          i.fa.fa-lg.fa-fw.fa-home
+          span.menu-item-parent Dashboard
+      li
+        a(href='ajax/inbox.html')
+          i.fa.fa-lg.fa-fw.fa-inbox
+          span.menu-item-parent Inbox
+          span.badge.pull-right.inbox-badge 15
+      li
+        a(href='javascript:;')
+          i.fa.fa-lg.fa-fw.fa-table
+          span.menu-item-parent Tables
+        ul
+          li
+            a(href='javascript:;') Normal Table
+          li
+            a(href='javascript:;') Data Tables
+  span.minifyme
+    i.fa.fa-arrow-circle-left.hit

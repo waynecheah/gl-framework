@@ -23,11 +23,11 @@ table.table.table-striped
       td {{post.creation}}
       td {{post.lastUpdate}}
       td
-        button.btn(ng-click='activePost(post)') Edit
-        button.btn.btn-danger(ng-click='delete(post)') Delete
+        button.btn.btn-xs(ng-click='activePost(post)') Edit
+        button.btn.btn-xs.btn-danger(ng-click='delete(post)') Delete
 
-button.btn(ng-if='!editing') New Post
-button.btn(ng-if='editing') Edit Post
+h3(ng-if='!editing') New Post
+h3(ng-if='editing') Edit Post
 
 
 - var form = 'mypost'
@@ -56,4 +56,5 @@ form(name=form, ng-submit='save(post)', novalidate='')
 
   button.btn.btn-primary(type='submit') Submit
 
+br
 button.btn.btn-success(ng-if='editing', ng-click='newPost()') New Post

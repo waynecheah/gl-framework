@@ -7,7 +7,7 @@ head
   meta(charset='utf-8')
   title GL App
   meta(name='description', content='')
-  meta(name='viewport', content='width=device-width')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
   // inject:head:js 
   // endinject 
   // Place favicon.ico and apple-touch-icon.png in the root directory 
@@ -21,11 +21,118 @@ head
   // inject:html 
   // endinject 
 
-body(ng-app='glApp')
+  // GOOGLE FONT 
+  link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700')
+
+  // iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance 
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black')
+
+body.fixed-header(ng-app='glApp')
   //[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]
 
   // Add your site or application content here
-  .container
+  section.container
+    // HEADER 
+    header.header.fixed-top.clearfix
+      .brand
+        a.logo(href='index.html')
+          img.ph(alt='', ph-img='130x55')
+        .sidebar-toggle-box
+          .fa.fa-bars
+
+      .nav.notify-row
+        ul.nav.top-menu
+          li.dropdown
+            a.dropdown-toggle(href='javascript:;', data-toggle='dropdown-toggle')
+              i.fa.fa-tasks
+              span.badge.bg-success 2
+            ul.dropdown-menu.extended.tasks-bar
+              li
+                p You have 2 pending tasks
+              li
+                a(href='javascript:;')
+                  .task-info.clearfix
+                    .desc.pull-left
+                      h5 Target Sell
+                      p 25% , Deadline 12 June’13
+                    span.notification-pie-chart.pull-right(data-percent='45')
+                      span.percent
+              li.external
+                a(href='javascript:;') See All Tasks
+          li.dropdown
+            a.dropdown-toggle(href='javascript:;', data-toggle='dropdown')
+              i.fa.fa-envelope-o
+              span.badge.bg-important 3
+            ul.dropdown-menu.extended.inbox
+              li
+                p.red You have 4 Mails
+              li
+                a(href='javascript:;')
+                  span.photo
+                    img.ph(alt='avatar', ph-img='40x40')
+                  span.subject
+                    span.from Wayne Cheah
+                    span.time Just now
+                  span.message(ph-txt='1s')
+              li
+                a(href='javascript:;')
+                  span.photo
+                    img.ph(alt='avatar', ph-img='40x40')
+                  span.subject
+                    span.from Kok Weng
+                    span.time 2 min ago
+                  span.message(ph-txt='1s')
+              li
+                a(href='javascript:;') See all messages
+          li.dropdown
+            a.dropdown-toggle(href='javascript:;', data-toggle='dropdown')
+              i.fa.fa-bell-o
+              span.badge.bg-warning 2
+            ul.dropdown-menu.extended.notification
+              li
+                p Notifications
+              li
+                .alert.alert-info.clearfix
+                  span.alert-icon
+                    i.fa.fa-bolt
+                  .noti-info
+                    a(href='javascript:;', ph-txt='1s')
+              li
+                .alert.alert-danger.clearfix
+                  span.alert-icon
+                    i.fa.fa-bolt
+                  .noti-info
+                    a(href='javascript:;', ph-txt='1s')
+
+      .top-nav.clearfix
+        ul.nav.pull-right.top-menu
+        li
+          input.form-control.search(placeholder='Search')
+        li.dropdown
+          a.dropdown-toggle(href='javascript:;', data-toggle='dropdown')
+            img(alt='', ph-img='29x29')
+            span.username John Doe
+            b.caret
+          ul.dropdown-menu.extended.logout
+            li
+              a(href='javascript:;')
+                i.fa.fa-suitcase
+                | Profile
+            li
+              a(href='javascript:;')
+                i.fa.fa-cog
+                | Settings
+            li
+              a(href='javascript:;')
+                i.fa.fa-key
+                | Log Out
+        li
+          .toggle-right-box
+            .fa.fa-bars
+
+
+
     .header(ng-controller='navigationCtrl')
       ul.nav.nav-pills.pull-right
         li(ng-class='{active:isActive(\'/\')}')
@@ -35,7 +142,7 @@ body(ng-app='glApp')
         li(ng-class='{active:isActive(\'/users/login\')}')
           a(ng-href='/#/users/login') Sign In
       .clearfix
-    .body(ng-view='')
+    .body(ng-view='', style='width:800px; margin:auto;')
 
   // Google Analytics: change UA-XXXXX-X to be your site's ID 
   script.
