@@ -12,7 +12,12 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 // --------------------------------------------------
 body {
     color: #767676;
+    background-color: #f1f2f7;
     font-family: 'Open Sans',sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size: 13px;
+    text-rendering: optimizeLegibility;
 }
 a {
     color: #32323A;
@@ -35,9 +40,14 @@ img.ph {
 .container {
     width: 100%;
     height: 100%;
+    padding: 0;
+    margin: 0;
     transition: all .3s ease-in-out;
 }
 
+//
+// Header
+// --------------------------------------------------
 .header {
     left: 0;
     right: 0;
@@ -404,6 +414,168 @@ img.ph {
     }
 }
 
+//
+// Sidebar
+// --------------------------------------------------
+#sidebar {
+    width: 240px;
+    height: 100%;
+    position: fixed;
+    background: #32323a;
+    transition: all .3s ease-in-out;
+
+    ul li {
+        position: relative;
+    }
+}
+.leftside-navigation, .right-stat-bar{
+    height: 100%;
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+}
+/* LEFT NAVIGATION ICON */
+.dcjq-icon {
+    height: 17px;
+    width: 17px;
+    display: inline-block;
+    background: url(../images/nav-expand.png) no-repeat top;
+    border-radius: 3px;
+    position: absolute;
+    right: 10px;
+}
+.active .dcjq-icon {
+    background: url(../images/nav-expand.png) no-repeat bottom;
+    border-radius: 3px;
+}
+.right-side-accordion .dcjq-icon {
+    height: 17px;
+    width: 17px;
+    display: inline-block;
+    background: url(../images/acc-expand.png) no-repeat top;
+    border-radius: 3px;
+    position: absolute;
+    right: 10px;
+}
+.right-side-accordion .active .dcjq-icon {
+    background: url(../images/acc-expand.png) no-repeat bottom;
+    border-radius: 3px;
+}
+
+.right-side-accordion li:nth-child(2) ul li .prog-row {
+    border: none;
+}
+
+.nav-collapse.collapse {
+    display: inline;
+}
+ul.sidebar-menu,ul.sidebar-menu li ul.sub {
+    margin: -2px 0 0;
+    padding: 0;
+}
+ul.sidebar-menu {
+    padding-top: 80px;
+
+}
+#sidebar>ul>li>ul.sub {
+    display: none;
+}
+#sidebar .sub-menu>.sub li a {
+    padding-left:46px;
+}
+#sidebar>ul>li.active>ul.sub,#sidebar>ul>li>ul.sub>li>a {
+    display:block;
+}
+ul.sidebar-menu li ul.sub li {
+    background:#28282e;
+    margin-bottom:0;
+    margin-left:0;
+    margin-right:0;
+}
+ul.sidebar-menu li ul.sub li a {
+    font-size:12px;
+    padding-top:13px;
+    padding-bottom:13px;
+    transition:all 0.3s ease;
+    color:#aeb2b7;
+}
+ul.sidebar-menu li ul.sub li a:hover,ul.sidebar-menu li ul.sub li.active a {
+    color: #1fb5ad;
+    transition:all 0.3s ease;
+    display:block;
+    background:#202025;
+}
+ul.sidebar-menu li {
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+ul.sidebar-menu li.sub-menu {
+    line-height:15px;
+}
+ul.sidebar-menu ul.sub li {
+    border-bottom:none;
+}
+ul.sidebar-menu li a span {
+    display:inline-block;
+}
+ul.sidebar-menu li a {
+    color:#aeb2b7;
+    text-decoration:none;
+    display:block;
+    padding:18px 0 18px 25px;
+    font-size:12px;
+    outline:none;
+    transition:all 0.3s ease;
+}
+ul.sidebar-menu li a.active,ul.sidebar-menu li a:hover,ul.sidebar-menu li a:focus {
+    background:#28282e;
+    color:#1FB5AD;
+    display:block;
+    transition:all 0.3s ease;
+}
+ul.sidebar-menu li a i {
+    font-size:15px;
+    padding-right:6px;
+}
+ul.sidebar-menu li a:hover i,ul.sidebar-menu li a:focus i {
+    color:#1fb5ad;
+}
+ul.sidebar-menu li a.active i {
+    color:#1fb5ad;
+}
+.mail-info,.mail-info:hover {
+    margin:-3px 6px 0 0;
+    font-size: 11px;
+}
+
+//
+// Main Content
+// --------------------------------------------------
+.main-content {
+    margin-left: 240px;
+    transition: all .3s ease-in-out;
+
+    .wrapper {
+        display: inline-block;
+        margin-top: 80px;
+        padding: 15px;
+        width: 100%;
+
+        .panel-heading {
+            border-color: #eff2f7;
+            font-size: 13px;
+            font-weight: 400;
+            background: #fafafa;
+            text-transform: uppercase;
+            padding: 15px;
+        }
+        .panel-body {
+            padding: 15px;
+        }
+    }
+}
+
 .noti-info {
     padding-left: 10px;
     padding-top: 6px;
@@ -503,4 +675,28 @@ img.ph {
 }
 .badge.bg-inverse {
     background: #2A3542;
+}
+
+//
+// Collapsible
+// --------------------------------------------------
+.tools a {
+    margin-left:10px;
+    color:#a7a7a7;
+    font-size: 12px;
+}
+
+//
+// Animation
+// --------------------------------------------------
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+    transition: all linear 0.5s;
+    display: block !important;
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove {
+    opacity: 0;
+}
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
 }

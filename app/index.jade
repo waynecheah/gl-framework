@@ -130,19 +130,36 @@ body.fixed-header(ng-app='glApp')
           li
             .toggle-right-box
               .fa.fa-bars
+    
+    aside
+      #sidebar.nav-collapse
+        .leftside-navigation(ng-controller='navigationCtrl')
+          ul.sidebar-menu
+            li
+              a(href='#', ng-class='{active:isActive(\'/\')}')
+                i.fa.fa-dashboard
+                span Dashboard
+            li
+              a(href='/#/posts', ng-class='{active:isActive(\'/posts\')}')
+                i.fa.fa-book
+                span Posts
+            li
+              a(href='/#/users/login', ng-class='{active:isActive(\'/users/login\')}')
+                i.fa.fa-user
+                span Log In
 
+    .main-content
+      .wrapper
+        .row
+          .col-sm-12
+            section.panel
+              header.panel-heading Dashboard
+                span.tools.pull-right
+                  a.fa.fa-chevron-down(href='javascript:;', ng-click='hideBody = !hideBody')
+                  a.fa.fa-cog(href='javascript:;')
+                  a.fa.fa-times(href='javascript:;')
+              .panel-body.animate-show(ng-view='', ng-hide='hideBody', style='width:800px; margin:auto;')
 
-
-    .header(ng-controller='navigationCtrl')
-      ul.nav.nav-pills.pull-right
-        li(ng-class='{active:isActive(\'/\')}')
-          a(ng-href='#') Home
-        li(ng-class='{active:isActive(\'/posts\')}')
-          a(ng-href='/#/posts') Posts
-        li(ng-class='{active:isActive(\'/users/login\')}')
-          a(ng-href='/#/users/login') Sign In
-      .clearfix
-    .body(ng-view='', style='width:800px; margin:auto;')
 
   // Google Analytics: change UA-XXXXX-X to be your site's ID 
   script.
