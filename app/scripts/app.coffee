@@ -3,6 +3,7 @@
 glApp =
 
     angular.module 'glApp', [
+        'ngAnimate'
         'ngResource'
         'ngSanitize'
         'ngRoute'

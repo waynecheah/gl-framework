@@ -689,14 +689,44 @@ ul.sidebar-menu li a.active i {
 //
 // Animation
 // --------------------------------------------------
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-    transition: all linear 0.5s;
-    display: block !important;
+.flipInX {
+    backface-visibility: visible!important;
+    animation-name: flipInX;
+}
+.dropdown {
+    animation-name: flipInX;
+    animation-duration: .4s;
+    animation-fill-mode: both;
 }
 
-.animate-show.ng-hide-add.ng-hide-add-active, .animate-show.ng-hide-remove {
+.toggle.ng-hide-add, .toggle.ng-hide-remove {
+    transition: all linear 300ms;
+    display: block !important;
+}
+.toggle.ng-hide-add.ng-hide-add-active, .toggle.ng-hide-remove {
+    -webkit-transform: translateY(-25px);
     opacity: 0;
 }
-.animate-show.ng-hide-add, .animate-show.ng-hide-remove.ng-hide-remove-active {
+.toggle.ng-hide-remove.ng-hide-remove-active, .toggle.ng-hide-add {
+    -webkit-transform: translateY(0);
     opacity: 1;
+}
+
+.animate-enter, .animate-leave {
+    transition: 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275) all;
+}
+
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fadeInDown {
+    animation-name: fadeInDown;
 }

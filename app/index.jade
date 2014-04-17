@@ -155,10 +155,10 @@ body.fixed-header(ng-app='glApp')
             section.panel
               header.panel-heading Dashboard
                 span.tools.pull-right
-                  a.fa.fa-chevron-down(href='javascript:;', ng-click='hideBody = !hideBody')
+                  a.fa.fa-chevron-down(href='javascript:;', ng-click='dashboard.tg=!dashboard.tg')
                   a.fa.fa-cog(href='javascript:;')
                   a.fa.fa-times(href='javascript:;')
-              .panel-body.animate-show(ng-view='', ng-hide='hideBody', style='width:800px; margin:auto;')
+              .panel-body.toggle(ng-view='', ng-hide='dashboard.tg', nanimate="'{enter: 'fade-enter', leave: 'fade-leave'}'", style='width:800px; margin:auto;')
 
 
   // Google Analytics: change UA-XXXXX-X to be your site's ID 
