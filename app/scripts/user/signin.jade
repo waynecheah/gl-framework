@@ -14,25 +14,34 @@ mixin input(type, name, model)
 - var form = 'loginForm'
 - var model = 'user'
 
-form.form(name=form, ng-submit='login()')
-  .alert.alert-danger(ng-show='onAlert') {{alertMessage}}
+section.panel
+  header.panel-heading Login
+    span.tools.pull-right
+      a.fa(href='javascript:;', ng-click='login.tg=!login.tg',
+      ng-class="{ 'fa-chevron-down':!login.tg, 'fa-chevron-up':login.tg }")
+      a.fa.fa-cog(href='javascript:;')
+      a.fa.fa-times(href='javascript:;')
+  .panel-body.toggle(ng-if='!login.tg', style='margin:auto;')
 
-  //- var name   = 'email'
-  //- var model = 'user.'+name
-  //- var change = "isValid('"+name+"')"
-  //- var blur   = "validate('"+name+"')"
-  .form-group.has-feedback(ng-class='emailCls')
-    label.control-label(for='') Email.
-    +input('email', 'email', model)
-    //-input.form-control(type='email', name=name, ng-model=model, ng-change=change, ng-blur=blur)
-    span.form-control-feedback(ng-class='emailIcon')
-    p.help-block {{err.email}}
+    form.form(ng-controller='SigninCtrl', name=form, ng-submit='login()', style='max-width:300px; margin:auto;')
+      .alert.alert-danger(ng-show='onAlert') {{alertMessage}}
 
-  .form-group.has-feedback(ng-class='passwordCls')
-    label.control-label(for='') Password
-    +input('password', 'password', model)
-    span.form-control-feedback(ng-class='passwordIcon')
-    p.help-block {{err.password}}
+      //- var name   = 'email'
+      //- var model = 'user.'+name
+      //- var change = "isValid('"+name+"')"
+      //- var blur   = "validate('"+name+"')"
+      .form-group.has-feedback(ng-class='emailCls')
+        label.control-label(for='') Email.
+        +input('email', 'email', model)
+        //-input.form-control(type='email', name=name, ng-model=model, ng-change=change, ng-blur=blur)
+        span.form-control-feedback(ng-class='emailIcon')
+        p.help-block(ng-if='emailErr') {{err.email}}
 
-  .form-group
-    button.btn.btn-primary(type='submit', ng-disabled='invalid') Log In
+      .form-group.has-feedback(ng-class='passwordCls')
+        label.control-label(for='') Password
+        +input('password', 'password', model)
+        span.form-control-feedback(ng-class='passwordIcon')
+        p.help-block {{err.password}}
+
+      .form-group
+        button.btn.btn-primary(type='submit', ng-disabled='invalid') Log In

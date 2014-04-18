@@ -1,22 +1,31 @@
 
-.wrap(style='max-width:800px; margin:auto;')
-  .jumbotron
-    p.lead
-      img(src='images/yeoman.png', alt='I"m Yeoman')
-      br
-      | Always a pleasure scaffolding your apps.
+section.panel
+  header.panel-heading Dashboard
+    span.tools.pull-right
+      a.fa(href='javascript:;', ng-click='dashboard.tg=!dashboard.tg',
+       ng-class="{ 'fa-chevron-down':!dashboard.tg, 'fa-chevron-up':dashboard.tg }")
+      a.fa.fa-cog(href='javascript:;')
+      a.fa.fa-times(href='javascript:;')
+  .panel-body.toggle(ng-if='!dashboard.tg', style='margin:auto;')
 
-  .wrap(style='padding:0 18px;')
-    .row.marketing
-      h4 AngularJS
-      p
-        | AngularJS is a toolset for building the framework most suited to your application development.
-      h4 Data Binding
-      div Angular: {{crossbind}}
-      div
-        input#cross-bind(placeholder='data binding', ng-model='crossbind')
+    .wrap(style='max-width:800px; margin:auto;')
+      .jumbotron
+        p.lead
+          img(src='images/yeoman.png', alt='I"m Yeoman')
+          br
+          | Always a pleasure scaffolding your apps.
 
-    hr
+      .wrap(style='padding:0 18px;')
+        .row.marketing
+          h4 AngularJS
+          p
+            | AngularJS is a toolset for building the framework most suited to your application development.
+          h4 Data Binding
+          div Angular: {{crossbind}}
+          div
+            input#cross-bind(placeholder='data binding', ng-model='crossbind')
 
-    .row.marketing
-      my-element(owner='Kok Weng', crossbind='{{crossbind}}')
+        hr
+
+        .row.marketing
+          my-element(owner='Kok Weng', crossbind='{{crossbind}}')

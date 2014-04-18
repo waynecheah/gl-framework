@@ -70,7 +70,7 @@ body.fixed-header(ng-app='glApp')
               li
                 a(href='javascript:;')
                   span.photo
-                    img(alt='avatar', ph-img='40x40', src='{{photo1}}', style='width:40px; height:40px;')
+                    img(alt='avatar', ph-img='40x40', ng-src='{{photo1}}', style='width:40px; height:40px;')
                   span.subject
                     span.from {{fullname1}}
                     span.time Just now
@@ -78,7 +78,7 @@ body.fixed-header(ng-app='glApp')
               li
                 a(href='javascript:;')
                   span.photo
-                    img(alt='avatar', ph-img='40x40', src='{{photo2}}', style='width:40px; height:40px;')
+                    img(alt='avatar', ph-img='40x40', ng-src='{{photo2}}', style='width:40px; height:40px;')
                   span.subject
                     span.from {{fullname2}}
                     span.time 2 min ago
@@ -111,7 +111,7 @@ body.fixed-header(ng-app='glApp')
             input.form-control.search(placeholder='Search')
           li.dropdown
             a.dropdown-toggle(href='javascript:;', data-toggle='dropdown')
-              img(alt='', ph-img='29x29', src='{{photo}}', style='width:29px; height:29px;')
+              img(alt='', ph-img='29x29', ng-src='{{photo}}', style='width:29px; height:29px;')
               span.username {{fullname}}
               b.caret
             ul.dropdown-menu.extended.logout
@@ -151,15 +151,7 @@ body.fixed-header(ng-app='glApp')
     .main-content
       .wrapper
         .row
-          .col-sm-12
-            section.panel
-              header.panel-heading Dashboard
-                span.tools.pull-right
-                  a.fa(href='javascript:;', ng-click='dashboard.tg=!dashboard.tg',
-                  ng-class="{ 'fa-chevron-down':!dashboard.tg, 'fa-chevron-up':dashboard.tg }")
-                  a.fa.fa-cog(href='javascript:;')
-                  a.fa.fa-times(href='javascript:;')
-              .panel-body.toggle(ng-view='', ng-if='!dashboard.tg', style='margin:auto;')
+          .col-sm-12(ng-view='')
 
 
   // Google Analytics: change UA-XXXXX-X to be your site's ID 

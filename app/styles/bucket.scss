@@ -8,6 +8,44 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 
 
 //
+// Bootstrap Overwrite
+// --------------------------------------------------
+form.form {
+    .alert {
+        margin-top: 10px;
+    }
+    .form-group {
+        transition: all 1s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        padding: 8px;
+
+        .help-block {
+            padding-left: 5px;
+            margin-bottom: 0;
+        }
+    }
+    .has-feedback {
+        .form-control-feedback {
+            top: 30px;
+        }
+    }
+    .has-error {
+        .form-control-feedback {
+            color: #a94442;
+        }
+    }
+
+    .help-block.ng-enter, .help-block.ng-leave {
+        transition: all 3s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    }
+    .help-block.ng-enter, .help-block.ng-leave.ng-leave-active {
+        opacity: 0;
+    }
+    .help-block.ng-leave, .help-block.ng-enter.ng-enter-active {
+        opacity: 1;
+    }
+}
+
+//
 // Template
 // --------------------------------------------------
 body {

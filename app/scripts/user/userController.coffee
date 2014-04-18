@@ -27,6 +27,7 @@ glApp.users =
     .controller 'SigninCtrl', ['$scope', 'validation', 'auth', '$location', ($scope, validation, auth, $location) ->
         fm = 'loginForm' # form name
 
+        $scope.user  = {}
         $scope.error = {}
 
         validation.init $scope, fm
