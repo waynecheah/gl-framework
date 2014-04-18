@@ -32,7 +32,7 @@ body.fixed-header(ng-app='glApp')
   //[if lt IE 8]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]
 
   // Add your site or application content here
-  section.container
+  section.container(ng-controller='AppCtrl')
     // HEADER 
     header.header.fixed-top.clearfix
       .brand
@@ -70,17 +70,17 @@ body.fixed-header(ng-app='glApp')
               li
                 a(href='javascript:;')
                   span.photo
-                    img.ph(alt='avatar', ph-img='40x40')
+                    img(alt='avatar', ph-img='40x40', src='{{photo1}}', style='width:40px; height:40px;')
                   span.subject
-                    span.from Wayne Cheah
+                    span.from {{fullname1}}
                     span.time Just now
                   span.message(ph-txt='1s')
               li
                 a(href='javascript:;')
                   span.photo
-                    img.ph(alt='avatar', ph-img='40x40')
+                    img(alt='avatar', ph-img='40x40', src='{{photo2}}', style='width:40px; height:40px;')
                   span.subject
-                    span.from Kok Weng
+                    span.from {{fullname2}}
                     span.time 2 min ago
                   span.message(ph-txt='1s')
               li
@@ -111,8 +111,8 @@ body.fixed-header(ng-app='glApp')
             input.form-control.search(placeholder='Search')
           li.dropdown
             a.dropdown-toggle(href='javascript:;', data-toggle='dropdown')
-              img(alt='', ph-img='29x29')
-              span.username Wayne Cheah
+              img(alt='', ph-img='29x29', src='{{photo}}', style='width:29px; height:29px;')
+              span.username {{fullname}}
               b.caret
             ul.dropdown-menu.extended.logout
               li
@@ -155,10 +155,11 @@ body.fixed-header(ng-app='glApp')
             section.panel
               header.panel-heading Dashboard
                 span.tools.pull-right
-                  a.fa.fa-chevron-down(href='javascript:;', ng-click='dashboard.tg=!dashboard.tg')
+                  a.fa(href='javascript:;', ng-click='dashboard.tg=!dashboard.tg',
+                  ng-class="{ 'fa-chevron-down':!dashboard.tg, 'fa-chevron-up':dashboard.tg }")
                   a.fa.fa-cog(href='javascript:;')
                   a.fa.fa-times(href='javascript:;')
-              .panel-body.toggle(ng-view='', ng-hide='dashboard.tg', nanimate="'{enter: 'fade-enter', leave: 'fade-leave'}'", style='width:800px; margin:auto;')
+              .panel-body.toggle(ng-view='', ng-if='!dashboard.tg', style='margin:auto;')
 
 
   // Google Analytics: change UA-XXXXX-X to be your site's ID 

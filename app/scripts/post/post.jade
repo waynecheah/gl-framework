@@ -11,16 +11,16 @@ table.table.table-striped
   thead
     th Author
     th Title
-    th Content
-    th Creation
+    th.hidden-xs Content
+    th.hidden-xs Creation
     th Last Update
     th Action
   tbody
     tr(ng-repeat='post in posts')
       td {{post.author}}
       td {{post.title}}
-      td {{post.content}}
-      td {{post.creation}}
+      td.hidden-xs {{post.content}}
+      td.hidden-xs {{post.creation}}
       td {{post.lastUpdate}}
       td
         button.btn.btn-xs(ng-click='activePost(post)') Edit
