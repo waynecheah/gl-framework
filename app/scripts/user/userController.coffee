@@ -27,6 +27,11 @@ glApp.users =
     .controller 'SigninCtrl', ['$scope', 'validation', 'auth', '$location', ($scope, validation, auth, $location) ->
         fm = 'loginForm' # form name
 
+        $scope.googleLogged = no
+        $scope.$watch 'googleLogged', (newValue, oldValue) ->
+            return unless newValue
+            console.warn newValue, oldValue
+
         $scope.user  = {}
         $scope.error = {}
 
