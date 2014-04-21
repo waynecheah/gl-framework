@@ -173,7 +173,7 @@ gulp.task('default', function (){
 // Connect
 gulp.task('connect', $.connect.server({
     root: [build_dir, app_dir],
-    port: 8080,
+    port: 9000,
     livereload: true,
     open: { browser: 'Google Chrome Canary' }
 }));
