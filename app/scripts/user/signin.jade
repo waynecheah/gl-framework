@@ -45,7 +45,8 @@ section.panel
 
       .form-group
         button.btn.btn-primary(type='submit', ng-disabled='invalid') Log In
-
+      hr
       .form-group
-        input(ng-model='googleLogged')
-        gl-auth(ng='googleLogged', onemore='dummy')
+        gl-auth(ng='googleLogged', apiKey='AIzaSyD6z5RkfXSuBKGwm0djIHoRWm-OLsS7IYI')
+        p
+          input(ng-model='googleLogged')

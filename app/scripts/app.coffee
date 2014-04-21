@@ -1,5 +1,28 @@
 'use strict'
 
+window.env    = 'dev'
+window.gdebug = (name, collapsed=false) ->
+    return if 'env' of window is false
+
+    if not name
+        console.groupEnd()
+    else
+        if collapsed then console.groupCollapsed name else console.group name
+    return
+# END gdebug
+
+window.debug = (msg, type='log') ->
+    return if 'env' of window is false
+    switch type
+        when 'log' then console.log msg
+        when 'info' then console.info msg
+        when 'err' then console.error msg
+        when 'warn' then console.warn msg
+        when 'table' then console.table msg
+    return
+# END debug
+
+
 glApp =
 
     angular.module 'glApp', [

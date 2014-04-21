@@ -31,6 +31,7 @@ glApp.users =
         $scope.$watch 'googleLogged', (newValue, oldValue) ->
             return unless newValue
             console.warn newValue, oldValue
+            console.log gapi.user
 
         $scope.user  = {}
         $scope.error = {}

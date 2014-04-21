@@ -1,5 +1,5 @@
 'use strict';
-// Generated on 2014-02-24 using generator-gulp-webapp 0.0.3
+// generated on 2014-04-21 using generator-gulp-webapp 0.0.7
 
 var gulp        = require('gulp');
 var runSequence = require('run-sequence');
@@ -40,8 +40,8 @@ gulp.task('coffee', function() {
 gulp.task('scripts', function () {
     return gulp.src(app_dir+'/scripts/**/*.js')
         .pipe($.changed(app_dir+'/scripts'))
-        .pipe($.jshint('.jshintrc'))
-        .pipe($.jshint.reporter('default'))
+        .pipe($.jshint())
+        .pipe($.jshint.reporter($.jshintStylish))
         .pipe($.size({ showFiles: true }));
 });
 
@@ -106,12 +106,23 @@ gulp.task('jade', function() {
 });
 
 // HTML
-/*gulp.task('html', function () {
-    return gulp.src(app_dir+'/** /* .html')
-      .pipe($.useref())
-      .pipe(gulp.dest('dist'))
-      .pipe($.size({ showFiles: true }));
-});*/
+gulp.task('html', ['styles', 'scripts'], function () {
+    var jsFilter = $.filter('**/*.js');
+    var cssFilter = $.filter('**/*.css');
+
+    return gulp.src('app/*.html')
+        .pipe($.useref.assets())
+        .pipe(jsFilter)
+        .pipe($.uglify())
+        .pipe(jsFilter.restore())
+        .pipe(cssFilter)
+        .pipe($.csso())
+        .pipe(cssFilter.restore())
+        .pipe($.useref.restore())
+        .pipe($.useref())
+        .pipe(gulp.dest('dist'))
+        .pipe($.size({ showFiles: true }));
+});
 
 // Images
 gulp.task('images', function () {
@@ -125,12 +136,21 @@ gulp.task('images', function () {
         .pipe($.size({ showFiles: true }));
 });
 
+// Fonts
+gulp.task('fonts', function () {
+    return $.bowerFiles()
+        .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+        .pipe($.flatten())
+        .pipe(gulp.dest('dist/fonts'))
+        .pipe($.size({ showFiles: true }));
+});
+
 // Clean
-/*gulp.task('clean-pro', function () {
-    return gulp.src([dist_dir+'/styles', dist_dir+'/scripts', dist_dir+'/images'], {read: false}).pipe($.clean());
-});*/
+gulp.task('clean-pro', function () {
+    return gulp.src(dist_dir, { read: false }).pipe($.clean());
+});
 gulp.task('clean', function () {
-    return gulp.src(build_dir, {read: false}).pipe($.clean());
+    return gulp.src(build_dir, { read: false }).pipe($.clean());
 });
 
 // Open Application
@@ -142,11 +162,8 @@ gulp.task('clean', function () {
         }));
 });*/
 
-// Bundle
-//gulp.task('bundle', ['styles', 'scripts'], $.bundle(app_dir+'/*.html'));
-
 // Build
-//gulp.task('build', ['html', 'bundle', 'images']);
+//gulp.task('build', ['html', 'images', 'fonts']);
 
 // Default task
 gulp.task('default', function (){
@@ -156,7 +173,7 @@ gulp.task('default', function (){
 // Connect
 gulp.task('connect', $.connect.server({
     root: [build_dir, app_dir],
-    port: 9000,
+    port: 8080,
     livereload: true,
     open: { browser: 'Google Chrome Canary' }
 }));
@@ -164,9 +181,21 @@ gulp.task('reload', function () {
     return gulp.src(build_dir+'/index.html').pipe($.connect.reload());
 });
 
-// Inject Bower components
+// Bower components
 gulp.task('bower-files', function(){
     console.log($.bowerFiles({read: false}));
+});
+// Inject bower
+gulp.task('inject-bower', function(){
+    return gulp.src(build_dir+'/index.html')
+        .pipe($.inject(
+            $.bowerFiles({ read: false, debugging:false }), {
+                ignorePath: app_dir,
+                addRootSlash: false,
+                starttag: '<!-- bower:{{ext}} -->',
+                endtag: '<!-- endbower -->'
+            }
+        ))
 });
 // Inject bower, stylesheet, javascript and web component reference
 gulp.task('inject', function(){
@@ -227,8 +256,8 @@ gulp.task('watch', ['connect'], function () {
         build_dir+'/scripts/**/*.js',
         app_dir+'/images/**/*',
         app_dir+'/*.html'
-    ], function (event) {
-        return gulp.src(event.path).pipe($.connect.reload());
+    ], function (file) {
+        return gulp.src(file.path).pipe($.connect.reload());
     }).on('change', changed);
 
     // Watch .coffee files
@@ -257,5 +286,5 @@ gulp.task('watch', ['connect'], function () {
     gulp.watch(app_dir+'/images/**/*', ['images']);
 
     // Watch bower files
-    gulp.watch('bower.json', ['wiredep']);
+    gulp.watch('bower.json', ['inject-bower']);
 });

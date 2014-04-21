@@ -75,6 +75,22 @@ img.ph {
     background:#1FB5AD;
     color:#fff;
 }
+gl-auth::shadow {
+    button {
+        div.icon {
+            font-family: FontAwesome;
+
+            &:before {
+                content: "\f0d5";
+            }
+        }
+        div.text {
+            font-family: 'Open Sans',sans-serif;
+            font-weight: normal;
+            font-size: 13px;
+        }
+    }
+}
 .container {
     width: 100%;
     height: 100%;

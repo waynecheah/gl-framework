@@ -40,14 +40,14 @@ glApp
                 $scope.fullname1 = fullname
                 return
             return
-        , 500
+        , 800
         setTimeout ->
             randomProfile (photo, fullname) ->
                 $scope.photo2    = photo
                 $scope.fullname2 = fullname
                 return
             return
-        , 1300
+        , 1600
 
         return
     .controller 'MainCtrl', ['$scope', ($scope) ->
