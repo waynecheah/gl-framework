@@ -4,6 +4,7 @@ var fs        = require('fs');
 var _         = require('lodash');
 var mongoose  = require('mongoose');
 var lifecycle = require('mongoose-lifecycle');
+var log       = require('../../lib/log');
 
 //var upsertDate = require('./plugins/upsertDate');
 
@@ -69,7 +70,7 @@ fs.readdirSync(__dirname).forEach(function(file) {
         var obj = require('./' + moduleName);
         var Schema, Model;
 
-        console.log('Model ['+moduleName+'] has initialized');
+        log('d', 's', 'Model ['+moduleName+'] has initialized');
 
         if ('Name' in obj && 'Schema' in obj) {
             Schema = obj.Schema;

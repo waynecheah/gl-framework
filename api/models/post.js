@@ -3,7 +3,7 @@ var _        = require('lodash');
 var mongoose = require('mongoose');
 var Mixed    = mongoose.Schema.Types.Mixed;
 
-exports.Name = 'Client';
+exports.Name = 'Post';
 
 exports.Schema = mongoose.Schema({
     author: {
@@ -18,11 +18,11 @@ exports.Schema = mongoose.Schema({
         type: String,
         required: false
     },
-    creation: {
+    created: {
         type: String,
         required: false
     },
-    lastUpdate: {
+    modified: {
         type: String,
         required: false
     }

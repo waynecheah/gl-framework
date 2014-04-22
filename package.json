@@ -1,6 +1,16 @@
 {
   "name": "gl-framework",
+  "description": "A framework build on top Node.js/KoaJS/MongoDB/AngularJS/Polymer/Bootstrap",
+  "keywords": [],
   "version": "0.0.1",
+  "author": {
+    "name": "Wayne Cheah",
+    "email": "cheahkokweng@gmail.com",
+    "url": "http://www.kokweng.io"
+  },
+  "bugs": {
+    "url": "https://github.com/waynecheah/gl-framework/issues"
+  },
   "dependencies": {
     "koa": "~0.5.1",
     "koa-compress": "~1.0.4",
@@ -10,6 +20,7 @@
     "koa-static": "~1.4.3",
     "co-body": "0.0.1",
     "co-views": "~0.2.0",
+    "colors": "^0.6.2",
     "lodash": "^2.4.1",
     "mongoose": "^3.8.8",
     "mongoose-lifecycle": "^1.0.0"
@@ -75,8 +86,21 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "homepage": "http://www.kokweng.io",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.innerzon.com/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/waynecheah/gl-framework.git"
+  },
   "scripts": {
     "start": "node --harmony app.js",
+    "debug": "node debug app.js",
     "mtest": "mocha --harmony",
     "test": "grunt test"
   }
