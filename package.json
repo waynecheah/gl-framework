@@ -9,7 +9,10 @@
     "koa-router": "^3.1.2",
     "koa-static": "~1.4.3",
     "co-body": "0.0.1",
-    "co-views": "~0.2.0"
+    "co-views": "~0.2.0",
+    "lodash": "^2.4.1",
+    "mongoose": "^3.8.8",
+    "mongoose-lifecycle": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -36,7 +39,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.0",
-    "jshint-stylish": "~0.1.3",
+    "jshint-stylish": "^0.1.5",
     "karma": "^0.12.2",
     "karma-ng-html2js-preprocessor": "^0.1.0",
     "karma-ng-scenario": "^0.1.0",
@@ -55,7 +58,7 @@
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^0.4.1",
     "gulp-flatten": "^0.0.2",
-      "gulp-htmlmin": "^0.1.2",
+    "gulp-htmlmin": "^0.1.2",
     "gulp-imagemin": "~0.1.4",
     "gulp-inject": "^0.4.1",
     "gulp-jade": "^0.4.2",
@@ -66,7 +69,6 @@
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "~0.1.2",
     "gulp-util": "~2.2.9",
-    "jshint-stylish": "^0.1.5",
     "run-sequence": "^0.3.6",
     "wiredep": "^1.4.3"
   },

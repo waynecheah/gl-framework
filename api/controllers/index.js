@@ -1,31 +1,33 @@
+"use strict";
+
 var fs = require('fs');
+var _  = require('lodash');
 
 //var appController = require('./appController');
-var appController = function *() {
-    return {
-        layout: 'default',
+var appController = {
+    layout: 'default',
 
-        beforeRender: function *() {},
+    beforeRender: function *() {},
 
-        render: function *(name, layout) {
-            this.beforeRender();
+    render: function *(name, layout) {
+        this.beforeRender();
+    }
+}
+
+
+fs.readdirSync(__dirname).forEach(function(file) {
+    var controller, type, moduleName;
+
+    moduleName = file.substr(0, file.indexOf('.'));
+
+    if (moduleName !== 'index' && moduleName !== 'appController') {
+        controller = require('./' + moduleName);
+        type       = typeof(controller);
+
+        if (type != 'function' && type != 'array' && type == 'object') {
+            return exports[moduleName] = _.assign({}, appController, controller);
+        } else {
+            return exports[moduleName] = controller;
         }
     }
-} // appController
-
-
-//fs.readdirSync(__dirname).forEach(function(file) {
-//    var controller, moduleName;
-//
-//    moduleName = file.substr(0, file.indexOf('.'));
-//
-//    if (moduleName !== 'index' && moduleName !== 'appController') {
-//        controller = require('./' + moduleName);
-//
-//        if (!_.isFunction(controller) && !_.isArray(controller) && _.isObject(controller)) {
-//            return exports[moduleName] = _.assign(appController(), controller);
-//        } else {
-//            return exports[moduleName] = controller;
-//        }
-//    }
-//});
+});

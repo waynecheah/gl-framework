@@ -15,7 +15,9 @@ var sample = [{
     creation: '2014-04-09 10:51:12',
     lastUpdate: '2014-04-09 10:51:12'
 }];
-
+var mongoose = require('mongoose');
+//var Post     = mongoose.model('Post');
+//console.log(Post);
 
 var host = 'http://localhost:9000';
 
@@ -68,6 +70,13 @@ var Posts = {
     } // save
 };
 
+Posts.routes =  [
+    { route:'/home', fn:Posts.home },
+    { route:'/post', fn:Posts.list },
+    { route:'/post/:id', fn:Posts.fetch },
+    { method:'post', route:'/post', fn:Posts.create },
+    { method:'put', route:'/post', fn:Posts.save }
+];
 //route.get('Posts.home', '/post').action(Posts.home);
 //route.get('Posts.list', '/posts').action(Posts.list);
 //route.get('Posts.fetch', '/post/:id').action(Posts.fetch);

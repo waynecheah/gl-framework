@@ -1,7 +1,9 @@
 'use strict';
 
 var apiDir   = './api';
-var posts    = require(apiDir+'/controllers/posts');
+var _        = require('lodash');
+var models   = require(apiDir+'/models');
+var ctrls    = require(apiDir+'/controllers');
 var compress = require('koa-compress');
 var logger   = require('koa-logger');
 var serve    = require('koa-static');
@@ -17,11 +19,32 @@ app.use(logger());
 // Routers
 app.use(router(app));
 
-app.get('/home', posts.home)
-   .get('/post', posts.list)
-   .get('/post/:id', posts.fetch)
-   .post('/post', posts.create)
-   .put('/post', posts.save);
+_.each(ctrls, function(obj, ctrlName){
+    if ('routes' in obj === false) {
+        return;
+    }
+
+    console.log('Controller ['+ctrlName+'] has following routes:');
+    _.each(obj.routes, function(r){
+        var method = r.method ? r.method.toLowerCase() : '';
+
+        if (method == 'post') {
+            console.log('POST: '+ r.route);
+            app.post(r.route, r.fn);
+        } else if (method == 'put') {
+            console.log('PUT: '+ r.route);
+            app.put(r.route, r.fn);
+        } else {
+            console.log('GET: '+ r.route);
+            app.get(r.route, r.fn);
+        }
+    });
+});
+//app.get('/home', ctrls.posts.home)
+//   .get('/post', ctrls.posts.list)
+//   .get('/post/:id', ctrls.posts.fetch)
+//   .post('/post', ctrls.posts.create)
+//   .put('/post', ctrls.posts.save);
 
 
 // Serve static files
