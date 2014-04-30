@@ -70,3 +70,13 @@ glApp =
         client_id: '341678844265-5ak3e1c5eiaglb2h9ortqbs9q57ro6gb.apps.googleusercontent.com'
         scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
         immediate: yes
+
+    .value 'debug', (msg, type='log') ->
+        return if 'env' of window is false or window.env is 'pro'
+        switch type
+            when 'log' then console.log msg
+            when 'info' then console.info msg
+            when 'err' then console.error msg
+            when 'warn' then console.warn msg
+            when 'table' then console.table msg
+        return

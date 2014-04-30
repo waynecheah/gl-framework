@@ -16,10 +16,13 @@ var sample = [{
     lastUpdate: '2014-04-09 10:51:12'
 }];
 var mongoose = require('mongoose');
-//var Post     = mongoose.model('Post');
-//console.log(Post);
+var config   = require('../../config');
+var log      = require('../../lib/log');
 
-var host = 'http://localhost:9000';
+var webPort  = config.webPort ? ':'+config.webPort : '';
+var host     = 'http://localhost'+config.webPort;
+var Post     = mongoose.model('Post');
+
 
 var Posts = {
     home: function *() {
@@ -29,11 +32,21 @@ var Posts = {
     }, // home
 
     list: function *() {
+        var posts = function(cb){
+            Post.find({}, function(err, doc){
+                cb(err, doc);
+            });
+        };
         this.set('Access-Control-Allow-Origin', host);
-        this.body = yield sample;
+        this.body = yield posts;
     }, // list
 
     fetch: function *(id) {
+        var post = function(cb){
+            Post.fetch(id, function(err, doc){
+                cb(err, doc);
+            });
+        };
         var post = sample[1];
         
         if (!post) {

@@ -34,11 +34,11 @@ exports.Events = {
 };
 
 exports.Methods = {
-    find: function *(id, callback) {
+    fetch: function *(id, callback) {
         return this.model('Post').find({
             _id: id
         }, callback);
-    }, // find
+    }, // fetch
 
     edit: function *(req, callback) {
         var post = yield parse(this);

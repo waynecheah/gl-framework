@@ -14,8 +14,14 @@ glApp.posts =
     ]
 
     .provider 'Post', ->
+        url = 'http://localhost:3000/api/post' # default Post API url
+
+        @setUrl = (url) ->
+            url = url
+            return
+
         @$get = ['$resource', ($resource) ->
-            $resource 'http://localhost:3000/post/:_id', {},
+            $resource "#{url}/:_id", {},
                 update:
                     method: 'PUT'
         ]
