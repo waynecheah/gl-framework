@@ -139,7 +139,7 @@ Polymer 'gl-auth',
             if window.gapi.status is 'authorising' or window.gapi.status is 'incompleted'
                 console.log 'Waiting user to give authorise to the App'
         window.onfocus = ->
-            if window.gapi.status is 'authorising' or window.gapi.status is 'incompleted' 
+            if window.gapi.status is 'authorising' or window.gapi.status is 'incompleted'
                 console.warn 'User has return back from incompleted authorisation process'
                 window.gapi.status = 'incompleted'
 

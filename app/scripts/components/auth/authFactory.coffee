@@ -3,24 +3,24 @@
 angular.module 'glApp'
 
 .factory 'auth', ($http) ->
-        user = {}
+    user = {}
 
-        onLogged = ->
-            return
-        onLogout = ->
-            return
+    onLogged = ->
+        return
+    onLogout = ->
+        return
 
 
-        setUser: (token) ->
-            localStorage.auth_token = token
-            return
+    setUser: (token) ->
+        localStorage.auth_token = token
+        return
 
-        login: (user) ->
-            $http.post '/users/login', email: user.email, password: user.password
-            onLogged()
-            return
+    login: (user) ->
+        $http.post '/users/login', email: user.email, password: user.password
+        onLogged()
+        return
 
-        logout: ->
-            onLogout()
-            return
+    logout: ->
+        onLogout()
+        return
 # END factory

@@ -2,11 +2,11 @@
 
 angular.module 'glApp'
 
-.service 'PostService', () ->
+.service 'PostService', ->
     id    = null
     posts = []
 
-    @save = (post) 
+    @save = (post) ->
         if post.id is null  # if this is new post, add it in posts array
             posts.push post
         else # for existing post, find this post using id and update it.
@@ -24,8 +24,8 @@ angular.module 'glApp'
     # END delete
 
     @list = ->
-        posts;
+        posts
     # END list
 
     return
-# END service   
+# END service
