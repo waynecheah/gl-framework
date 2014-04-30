@@ -165,6 +165,21 @@ gulp.task('clean', function () {
 // Build
 //gulp.task('build', ['html', 'images', 'fonts']);
 
+// Angular-gettext Translation
+gulp.task('pot', function () {
+    return gulp.src([build_dir+'/**/*.html', build_dir+'/scripts/**/*.js'])
+        .pipe($.angularGettext.extract('template.pot'))
+        .pipe(gulp.dest(app_dir+'/po/'));
+});
+gulp.task('translations', function () {
+    return gulp.src(app_dir+'/po/**/*.po')
+        .pipe($.angularGettext.compile({
+            //format: 'json',
+            module: 'glApp'
+        }))
+        .pipe(gulp.dest(app_dir+'/scripts'));
+});
+
 // Default task
 gulp.task('default', function (){
     runSequence('clean', ['coffee','sass','jade'], ['inject'], 'watch');
@@ -226,6 +241,7 @@ gulp.task('inject', function(){
         .pipe($.inject(
             gulp.src([
                 build_dir+'/scripts/**/*.js',
+                app_dir+'/scripts/**/*.js',
                 '!'+build_dir+'/scripts/components/module/**/*.js',
                 '!'+build_dir+'/scripts/subsection/**/*.js',
                 build_dir+'/elements/**/*.js',

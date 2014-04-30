@@ -30,11 +30,17 @@ glApp =
         'ngResource'
         'ngSanitize'
         'ngRoute'
+        'gettext'
         'placeholders'
         'ui.bootstrap'
         'glApp.posts'
         'glApp.users'
     ]
+
+    .run (gettextCatalog) ->
+        gettextCatalog.currentLanguage = 'zh'
+        gettextCatalog.debug           = true
+        return
 
     .factory 'authInterceptor', ->
         request: (config) ->

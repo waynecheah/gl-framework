@@ -2,7 +2,7 @@
 
 glApp
 
-    .controller 'AppCtrl', ($scope, $http) ->
+    .controller 'AppCtrl', ($scope, $http, gettext) ->
         ucword = (name) ->
             words = name.split ' '
             angular.forEach words, (word, i) ->
@@ -25,9 +25,9 @@ glApp
             return
         # END randomProfile
 
-        $scope.fullname  = 'Wayne Cheah'
-        $scope.fullname1 = 'Wayne Cheah'
-        $scope.fullname2 = 'Kok Weng'
+        $scope.fullname  = gettext 'Wayne Cheah'
+        $scope.fullname1 = gettext 'Wayne Cheah'
+        $scope.fullname2 = gettext 'Kok Weng'
 
         randomProfile (photo, fullname) ->
             $scope.photo    = photo
@@ -50,9 +50,9 @@ glApp
         , 1600
 
         return
-    .controller 'MainCtrl', ['$scope', ($scope) ->
-        $scope.crossbind = 'Default ng data'
-        $scope.pageTitle = 'Angular + Polymer'
+    .controller 'MainCtrl', ['$scope', 'gettext', ($scope, gettext) ->
+        $scope.crossbind = gettext 'Default ng data'
+        $scope.pageTitle = gettext 'Angular + Polymer'
         $scope.awesomeThings = [
             'HTML5 Boilerplate'
             'AngularJS'

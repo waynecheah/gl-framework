@@ -18,10 +18,10 @@ glApp.users =
         return
     ]
 
-    .controller 'LoginController', ['$scope', '$routeParams', ($scope, $routeParams) ->
+    .controller 'LoginController', ['$scope', '$routeParams', 'gettext', ($scope, $routeParams, gettext) ->
         console.log $routeParams
-        $scope.username = 'username'
-        $scope.password = 'password'
+        $scope.username = gettext 'username'
+        $scope.password = gettext 'password'
         return
     ]
     .controller 'SigninCtrl', ['$scope', 'validation', 'auth', '$location', ($scope, validation, auth, $location) ->
@@ -46,7 +46,7 @@ glApp.users =
             validation.isValid fd
         # END isValid
     ]
-    .controller 'LoginCtrl', ['$scope', 'validation2', 'auth', '$location', ($scope, validation, auth, $location) ->
+    .controller 'LoginCtrl', ($scope, validation, auth, $location, gettext) ->
         fm = 'loginForm' # form name
 
         $scope.login = ->
@@ -65,13 +65,13 @@ glApp.users =
         error = ->
             $scope.invalidCredentials = true
             $scope.onAlert      = true
-            $scope.alertMessage = 'Wrong credentials'
+            $scope.alertMessage = gettext 'Wrong credentials'
             return
         # END error
         return
-    ]
-    .controller 'RegisterCtrl', ['$scope', '$routeParams', ($scope, $routeParams) ->
+
+    .controller 'RegisterCtrl', ['$scope', '$routeParams', 'gettext', ($scope, $routeParams, gettext) ->
         console.log $routeParams
-        $scope.fullname = 'fullname'
+        $scope.fullname = gettext 'fullname'
         return
     ]

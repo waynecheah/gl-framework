@@ -5,8 +5,8 @@ doctype html
 //[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]
 head
   meta(charset='utf-8')
-  title GL App
-  meta(name='description', content='')
+  title(translate) GL App
+  meta(name='description', content="{{'website description'|translate}}")
   meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
   // inject:head:js 
   // endinject 
@@ -138,15 +138,15 @@ body.fixed-header(ng-app='glApp')
             li
               a(href='#', ng-class='{active:isActive(\'/\')}')
                 i.fa.fa-dashboard
-                span Dashboard
+                span(translate) Dashboard
             li
               a(href='/#/posts', ng-class='{active:isActive(\'/posts\')}')
                 i.fa.fa-book
-                span Posts
+                span(translate) Posts
             li
               a(href='/#/users/login', ng-class='{active:isActive(\'/users/login\')}')
                 i.fa.fa-user
-                span Log In
+                span(translate) Log In
 
     .main-content
       .wrapper

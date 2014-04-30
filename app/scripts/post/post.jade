@@ -9,7 +9,8 @@ mixin input(type, name, model)
 - var model = 'post'
 
 section.panel
-  header.panel-heading Posts
+  header.panel-heading
+    span(translate) Posts
     span.tools.pull-right
       a.fa(href='javascript:;', ng-click='posts.tg=!dashboard.tg',
       ng-class="{ 'fa-chevron-down':!posts.tg, 'fa-chevron-up':posts.tg }")
@@ -19,15 +20,15 @@ section.panel
 
     table.table.table-striped
       thead
-        th Author
-        th Title
-        th.hidden-xs Content
-        th.hidden-xs Creation
-        th Last Update
-        th Action
+        th(translate) Author
+        th(translate) Title
+        th.hidden-xs(translate) Content
+        th.hidden-xs(translate) Creation
+        th(translate) Last Update
+        th(translate) Action
       tbody
         tr(ng-hide='posts.length')
-          td.text-center(colspan='6') no post
+          td.text-center(colspan='6', translate) no post
         tr(ng-repeat='post in posts')
           td {{post.author}}
           td {{post.title}}
@@ -35,35 +36,35 @@ section.panel
           td.hidden-xs {{post.creation}}
           td {{post.lastUpdate}}
           td
-            button.btn.btn-xs(ng-click='activePost(post)') Edit
-            button.btn.btn-xs.btn-danger(ng-click='delete(post)') Delete
+            button.btn.btn-xs(ng-click='activePost(post)', translate) Edit
+            button.btn.btn-xs.btn-danger(ng-click='delete(post)', translate) Delete
 
-    h3(ng-if='!editing') New Post
-    h3(ng-if='editing') Edit Post
+    h3(ng-if='!editing', translate) New Post
+    h3(ng-if='editing', translate) Edit Post
 
 
     form(name=form, ng-submit='save(post)', novalidate='')
       .alert.alert-danger(ng-show='onAlert') {{alertMessage}}
 
       .form-group.has-feedback(ng-class='authorCls')
-        label.control-label(for='') Author
+        label.control-label(for='', translate) Author
         +input('author', 'author', model)
         span.form-control-feedback(ng-class='authorIcon')
         p.help-block {{err.author}}
 
       .form-group.has-feedback(ng-class='titleCls')
-        label.control-label(for='') Title
+        label.control-label(for='', translate) Title
         +input('text', 'title', model)
         span.form-control-feedback(ng-class='titleIcon')
         p.help-block {{err.title}}
 
       .form-group.has-feedback(ng-class='contentCls')
-        label.control-label(for='') Content
+        label.control-label(for='', translate) Content
         +input('text', 'content', model)
         span.form-control-feedback(ng-class='contentIcon')
         p.help-block {{err.content}}
 
-      button.btn.btn-primary(type='submit') Submit
+      button.btn.btn-primary(type='submit', translate) Submit
 
     br
-    button.btn.btn-success(ng-if='editing', ng-click='newPost()') New Post
+    button.btn.btn-success(ng-if='editing', ng-click='newPost()', translate) New Post
