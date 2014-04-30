@@ -19,9 +19,9 @@ var mongoose = require('mongoose');
 var config   = require('../../config');
 var log      = require('../../lib/log');
 
-var webPort  = config.webPort ? ':'+config.webPort : '';
-var host     = 'http://localhost'+config.webPort;
-var Post     = mongoose.model('Post');
+var webPort = config.webPort ? ':'+config.webPort : '';
+var host    = 'http://localhost'+webPort;
+var Post    = mongoose.model('Post');
 
 
 var Posts = {
