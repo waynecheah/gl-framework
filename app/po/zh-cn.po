@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gl Framework\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Wayne Cheah <cheahkokweng@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Action"
+msgstr "行动"
+
+# to be decide
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Angular + Polymer"
+msgstr "安古拉＋珀利嚜"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Author"
+msgstr "作者"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Content"
+msgstr "内容"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Creation"
+msgstr "建立于"
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+msgid "Dashboard"
+msgstr "仪表盘"
+
+# to be decide
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Default ng data"
+msgstr "默认安柜资料"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Delete"
+msgstr "删除"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Edit"
+msgstr "编辑"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Edit Post"
+msgstr "编辑帖子"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Email."
+msgstr "电邮。"
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+msgid "GL App"
+msgstr "骨架 应用程式"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Kok Weng"
+msgstr "国荣"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Last Update"
+msgstr "最后更新"
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Log In"
+msgstr "登入"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Login"
+msgstr "登入"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "New Post"
+msgstr "新帖子"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+#, fuzzy
+msgid "Password"
+msgstr "密码"
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Posts"
+msgstr "帖子"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Sign-in with Google"
+msgstr "使用谷歌登入"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Submit"
+msgstr "提交"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Title"
+msgstr "标题"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Wayne Cheah"
+msgstr "韦恩 谢"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "Wrong credentials"
+msgstr "错误认证"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "fullname"
+msgstr "全名"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "no post"
+msgstr "没有帖子"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "password"
+msgstr "密码"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "username"
+msgstr "用户名"
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+msgid "website description"
+msgstr "网站介绍"

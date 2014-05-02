@@ -39,8 +39,10 @@ section.panel
             button.btn.btn-xs(ng-click='activePost(post)', translate) Edit
             button.btn.btn-xs.btn-danger(ng-click='delete(post)', translate) Delete
 
-    h3(ng-if='!editing', translate) New Post
-    h3(ng-if='editing', translate) Edit Post
+    h3(ng-if='!editing')
+      span(translate) New Post
+    h3(ng-if='editing')
+      span(translate) Edit Post
 
 
     form(name=form, ng-submit='save(post)', novalidate='')
@@ -67,4 +69,5 @@ section.panel
       button.btn.btn-primary(type='submit', translate) Submit
 
     br
-    button.btn.btn-success(ng-if='editing', ng-click='newPost()', translate) New Post
+    div(ng-if='editing')
+      button.btn.btn-success(ng-click='newPost()', translate) New Post

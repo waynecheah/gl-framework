@@ -15,7 +15,8 @@ mixin input(type, name, model)
 - var model = 'user'
 
 section.panel
-  header.panel-heading Login
+  header.panel-heading
+    span(translate) Login
     span.tools.pull-right
       a.fa(href='javascript:;', ng-click='login.tg=!login.tg',
       ng-class="{ 'fa-chevron-down':!login.tg, 'fa-chevron-up':login.tg }")
@@ -31,22 +32,22 @@ section.panel
       //- var change = "isValid('"+name+"')"
       //- var blur   = "validate('"+name+"')"
       .form-group.has-feedback(ng-class='emailCls')
-        label.control-label(for='') Email.
+        label.control-label(for='', translate) Email.
         +input('email', 'email', model)
         //-input.form-control(type='email', name=name, ng-model=model, ng-change=change, ng-blur=blur)
         span.form-control-feedback(ng-class='emailIcon')
         p.help-block(ng-if='emailErr') {{err.email}}
 
       .form-group.has-feedback(ng-class='passwordCls')
-        label.control-label(for='') Password
+        label.control-label(for='', translate) Password
         +input('password', 'password', model)
         span.form-control-feedback(ng-class='passwordIcon')
         p.help-block {{err.password}}
 
       .form-group
-        button.btn.btn-primary(type='submit', ng-disabled='invalid') Log In
+        button.btn.btn-primary(type='submit', ng-disabled='invalid', translate) Log In
       hr
       .form-group
-        gl-auth(ng='googleLogged', apiKey='AIzaSyD6z5RkfXSuBKGwm0djIHoRWm-OLsS7IYI')
+        gl-auth(ng='googleLogged', apiKey='AIzaSyD6z5RkfXSuBKGwm0djIHoRWm-OLsS7IYI', label="{{'Sign-in with Google'|translate}}")
         p
           input(ng-model='googleLogged')

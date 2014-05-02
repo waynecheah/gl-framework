@@ -10,16 +10,28 @@ var mongoose = require('mongoose');
 var serve    = require('koa-static');
 var router   = require('koa-router');
 //var route = require('koa-route');
+var cors     = require('koa-cors');
 var koa      = require('koa');
 var path     = require('path');
-//var config   = require('./config');
+var config   = require('./config');
 var database = require('./config/database');
 var log      = require('./lib/log');
 var app      = module.exports = koa();
 
+var webPort   = config.webPort ? ':'+config.webPort : '';
+var whitelist = ['http://localhost'+webPort, 'http://kokweng.io'+webPort];
+var corsOpts  = {
+    origin: function(origin, callback){
+        var valid = whitelist.indexOf(origin) !== -1;
+        callback(null, valid);
+    }
+};
 
 // Logger
 app.use(logger());
+
+// CORS
+app.use(cors());
 
 // Routers
 app.use(router(app));
@@ -38,7 +50,10 @@ _.each(ctrls, function(obj, ctrlName){
             app.post(apiDir+r.route, r.fn);
         } else if (method == 'put') {
             log('s', 'i', 'PUT: '+ apiDir+r.route);
-            app.put(apiDir+r.route, r.fn);
+            app.put(apiDir+r.route, cors(corsOpts), r.fn);
+        } else if (method == 'options') {
+            log('s', 'i', 'OPTIONS: '+ apiDir+r.route);
+            app.options(apiDir+r.route, cors());
         } else {
             log('s', 'i', 'GET: '+ apiDir+r.route);
             app.get(apiDir+r.route, r.fn);
@@ -50,7 +65,6 @@ _.each(ctrls, function(obj, ctrlName){
 //   .get('/post/:id', ctrls.posts.fetch)
 //   .post('/post', ctrls.posts.create)
 //   .put('/post', ctrls.posts.save);
-
 
 // Serve static files
 app.use(serve(path.join(__dirname, 'build')));

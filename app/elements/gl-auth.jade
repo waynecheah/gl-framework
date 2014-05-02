@@ -1,7 +1,7 @@
 
 link(rel='import', href='../bower_components/polymer/polymer.html')
 
-polymer-element(name='gl-auth', attributes='ng apiKey')
+polymer-element(name='gl-auth', attributes='ng apiKey label')
     template
         style.
           :host > button {
@@ -38,4 +38,4 @@ polymer-element(name='gl-auth', attributes='ng apiKey')
           }
         button#btnGl.gl(disabled)
           div.icon.icon-gplus
-          div.text Sign-in with Google
+          div.text {{label}}

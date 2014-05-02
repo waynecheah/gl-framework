@@ -11,7 +11,11 @@ var log       = require('../../lib/log');
 var appModel = {
     events: function(Model, customEvents) {
         var events = {
-            beforeInsert: function(data) {},
+            beforeInsert: function(data) {
+                if (!this.created) {
+                    return this.created = new Date;
+                }
+            },
             afterInsert: function(data) {},
             beforeUpdate: function(data) {
                 if (!this.modified) {

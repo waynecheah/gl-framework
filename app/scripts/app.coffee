@@ -38,7 +38,7 @@ glApp =
     ]
 
     .run (gettextCatalog) ->
-        gettextCatalog.currentLanguage = 'zh'
+        #gettextCatalog.currentLanguage = 'zh_CN'
         gettextCatalog.debug           = true
         return
 

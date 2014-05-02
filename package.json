@@ -12,15 +12,16 @@
     "url": "https://github.com/waynecheah/gl-framework/issues"
   },
   "dependencies": {
+    "co-body": "0.0.1",
+    "co-views": "~0.2.0",
+    "colors": "^0.6.2",
     "koa": "~0.5.1",
     "koa-compress": "~1.0.4",
+    "koa-cors": "0.0.8",
     "koa-logger": "~1.2.0",
     "koa-route": "~1.1.1",
     "koa-router": "^3.1.2",
     "koa-static": "~1.4.3",
-    "co-body": "0.0.1",
-    "co-views": "~0.2.0",
-    "colors": "^0.6.2",
     "lodash": "^2.4.1",
     "mongoose": "^3.8.8",
     "mongoose-lifecycle": "^1.0.0"

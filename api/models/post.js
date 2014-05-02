@@ -1,3 +1,4 @@
+"use strict";
 
 var _        = require('lodash');
 var mongoose = require('mongoose');
@@ -29,7 +30,14 @@ exports.Schema = mongoose.Schema({
 });
 
 exports.Events = {
-    beforeInsert: function *(data) {},
+    beforeInsert: function *(data) {
+        if (!this.created) {
+            return this.created = new Date;
+        }
+        if (!this.modified) {
+            return this.modified = new Date;
+        }
+    },
     afterInsert: function *(data) {}
 };
 

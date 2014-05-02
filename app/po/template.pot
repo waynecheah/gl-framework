@@ -1,0 +1,122 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Action"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Angular + Polymer"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Author"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Content"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Creation"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+msgid "Dashboard"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Default ng data"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Delete"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Edit"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Edit Post"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Email."
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+msgid "GL App"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Kok Weng"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Last Update"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Log In"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Login"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "New Post"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Password"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Posts"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/signin.html
+msgid "Sign-in with Google"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Submit"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "Title"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/appController.js
+msgid "Wayne Cheah"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "Wrong credentials"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "fullname"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/post/post.html
+msgid "no post"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "password"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/scripts/user/userController.js
+msgid "username"
+msgstr ""
+
+#: /Users/Cheah/Sites/gl-framework/build/index.html
+msgid "website description"
+msgstr ""
