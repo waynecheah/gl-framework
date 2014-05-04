@@ -24,7 +24,8 @@ var corsOpts  = {
     origin: function(origin, callback){
         var valid = whitelist.indexOf(origin) !== -1;
         callback(null, valid);
-    }
+    },
+    methods: 'GET,PUT,POST,DELETE,OPTIONS'
 };
 
 // Logger
@@ -46,16 +47,19 @@ _.each(ctrls, function(obj, ctrlName){
         var method = r.method ? r.method.toLowerCase() : '';
 
         if (method == 'post') {
-            log('s', 'i', 'POST: '+ apiDir+r.route);
+            log('s', 'i', 'POST: ' + apiDir + r.route);
             app.post(apiDir+r.route, r.fn);
         } else if (method == 'put') {
-            log('s', 'i', 'PUT: '+ apiDir+r.route);
-            app.put(apiDir+r.route, cors(corsOpts), r.fn);
-        } else if (method == 'options') {
-            log('s', 'i', 'OPTIONS: '+ apiDir+r.route);
+            log('s', 'i', 'PUT: ' + apiDir + r.route);
+            app.put(apiDir+r.route, r.fn);
+        } else if (method == 'delete') {
+            log('s', 'i', 'DELETE: ' + apiDir + r.route);
+            app.del(apiDir+r.route, r.fn); //, cors(corsOpts)
+        } if (method == 'options') {
+            log('s', 'i', 'OPTIONS: ' + apiDir + r.route);
             app.options(apiDir+r.route, cors());
         } else {
-            log('s', 'i', 'GET: '+ apiDir+r.route);
+            log('s', 'i', 'GET: ' + apiDir + r.route);
             app.get(apiDir+r.route, r.fn);
         }
     });

@@ -2,7 +2,10 @@
 
 var _        = require('lodash');
 var mongoose = require('mongoose');
-var Mixed    = mongoose.Schema.Types.Mixed;
+var parse    = require('co-body');
+var log      = require('../../lib/log');
+
+var Mixed = mongoose.Schema.Types.Mixed;
 
 exports.Name = 'Post';
 
@@ -27,29 +30,32 @@ exports.Schema = mongoose.Schema({
         type: String,
         required: false
     }
-});
+}/*, { versionKey: false }*/);
 
 exports.Events = {
-    beforeInsert: function *(data) {
-        if (!this.created) {
-            return this.created = new Date;
-        }
-        if (!this.modified) {
-            return this.modified = new Date;
-        }
-    },
-    afterInsert: function *(data) {}
+    afterInsert: function (model) {
+        log('d', 'i', 'Custom Mongoose Lifecycle event [afterInsert] do nothing now..');
+    }
 };
 
 exports.Methods = {
-    fetch: function *(id, callback) {
-        return this.model('Post').find({
+    fetch: function (id, callback) {
+        this.model('Post').find({
             _id: id
         }, callback);
     }, // fetch
 
-    edit: function *(req, callback) {
-        var post = yield parse(this);
+    updateRec: function (id, doc, callback) {
+        var that = this;
+        this.emit('beforeUpdate', doc);
+        this.findByIdAndUpdate(id, { $set:doc, $inc:{__v:1} }, function(err, doc){
+            if (!err) that.emit('afterUpdate', doc);
+            callback(err, doc);
+        });
+    }, // updateRec
+
+    edit: function (req, callback) {
+        var post = parse(this);
 
         query = {
             _id: post.id
@@ -67,7 +73,7 @@ exports.Methods = {
             if (numAffected === 0) {
                 return callback(new Error('Record is not modified'));
             }
-            return callback();
+            callback();
         });
     } // edit
 };

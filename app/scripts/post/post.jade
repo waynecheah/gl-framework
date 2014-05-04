@@ -33,8 +33,8 @@ section.panel
           td {{post.author}}
           td {{post.title}}
           td.hidden-xs {{post.content}}
-          td.hidden-xs {{post.creation}}
-          td {{post.lastUpdate}}
+          td.hidden-xs {{post.created}}
+          td {{post.modified}}
           td
             button.btn.btn-xs(ng-click='activePost(post)', translate) Edit
             button.btn.btn-xs.btn-danger(ng-click='delete(post)', translate) Delete

@@ -11,30 +11,65 @@ var log       = require('../../lib/log');
 var appModel = {
     events: function(Model, customEvents) {
         var events = {
-            beforeInsert: function(data) {
-                if (!this.created) {
-                    return this.created = new Date;
+            beforeInsert: function(model) {
+                if ('created' in model === true && !model.created) {
+                    log('d', 'i', 'Mongoose Lifecycle event [beforeInsert] insert new date to the field [created]');
+                    model.created = new Date;
+                }
+                if ('modified' in model === true && !model.modified) {
+                    log('d', 'i', 'Mongoose Lifecycle event [beforeInsert] insert new date to the field [modified]');
+                    model.modified = new Date;
                 }
             },
-            afterInsert: function(data) {},
-            beforeUpdate: function(data) {
-                if (!this.modified) {
-                    return this.modified = new Date;
-                }
+            afterInsert: function(data) {
+                log('d', 'i', 'Mongoose Lifecycle event [afterInsert]');
             },
-            afterUpdate: function(data) {},
-            beforeSave: function(data) {},
-            afterSave: function(data) {},
-            beforeRemove: function(data) {},
-            afterRemove: function(data) {}
+            beforeUpdate: function(model) {
+                log('d', 'd', model);
+                if ('created' in model === true) {
+                    log('d', 'i', 'Mongoose Lifecycle event [beforeUpdate] remove field value [created]');
+                    delete model.created;
+                }
+                if ('modified' in model === true) {
+                    log('d', 'i', 'Mongoose Lifecycle event [beforeUpdate] update new date to the field [modified]');
+                    model.modified = new Date;
+                }
+                if ('_id' in model === true) {
+                    log('d', 'i', 'Mongoose Lifecycle event [beforeUpdate] remove field [_id]');
+                    delete model._id;
+                }
+                if ('__v' in model === true) {
+                    log('d', 'i', 'Mongoose Lifecycle event [beforeUpdate] remove field [__v]');
+                    delete model.__v;
+                }
+                log('d', 'd', model);
+            },
+            afterUpdate: function(doc) {
+                log('d', 'i', 'Mongoose Lifecycle event [afterUpdate]');
+                log('d', 'i', 'The update response from Mongo is:');
+                log('d', 'd', doc);
+            },
+            beforeSave: function(data) {
+                log('d', 'i', 'Mongoose Lifecycle event [beforeSave]');
+            },
+            afterSave: function(data) {
+                log('d', 'i', 'Mongoose Lifecycle event [afterSave]');
+            },
+            beforeRemove: function(data) {
+                log('d', 'i', 'Mongoose Lifecycle event [beforeRemove]');
+            },
+            afterRemove: function(data) {
+                log('d', 'i', 'Mongoose Lifecycle event [afterRemove]');
+            }
         };
+
+        var modelEvents = events;
+
         if (customEvents !== null && _.isObject(customEvents)) {
-            _.assign(events, customEvents);
+            modelEvents = _.assign({}, events, customEvents);
         }
-        _.each(events, function(fn, event) {
-            Model.on(event, function(data) {
-                return fn(data);
-            });
+        _.each(modelEvents, function(fn, eventName) {
+            Model.on(eventName, fn);
         });
         return Model;
     },
@@ -42,19 +77,24 @@ var appModel = {
     methods: function(Schema, customMethods) {
         var methods = {
             lastUpdate: function(model, callback) {
-                return this.model(model).findOne({}, '-_id modified', {
+                var flds = '-_id modified';
+                var opts = {
                     sort: {
                         modified: -1
                     }
-                }, callback);
+                };
+                this.model(model).findOne({}, flds, opts, callback);
             }
         };
+        
+        var modelMethods = methods;
 
         if (customMethods !== null && _.isObject(customMethods)) {
-            _.assign(methods, customMethods);
+            modelMethods = _.assign({}, methods, customMethods);
         }
-        _.each(methods, function(fn, name) {
-            return Schema["static"](name, fn);
+        _.each(modelMethods, function(fn, name) {
+            log('d', 'i', 'Model has method ['+name+']');
+            Schema["static"](name, fn);
         });
         //Schema.plugin(upsertDate);
         Schema.plugin(lifecycle);
@@ -65,7 +105,7 @@ var appModel = {
 
 
 /*
- Modules are automatically loaded once they are declared in the controllers directory.
+ Models are automatically loaded once they are declared in the models directory.
  */
 fs.readdirSync(__dirname).forEach(function(file) {
     var moduleName = file.substr(0, file.indexOf('.'));
@@ -78,13 +118,17 @@ fs.readdirSync(__dirname).forEach(function(file) {
 
         if ('Name' in obj && 'Schema' in obj) {
             Schema = obj.Schema;
-            if ('Methods' in obj) { // extend model method
+            if ('Methods' in obj) { // extend model methods
                 Schema = appModel.methods(Schema, obj.Methods);
+            } else {
+                Schema = appModel.methods(Schema);
             }
 
             Model = mongoose.model(obj.Name, Schema);
-            if ('Events' in obj) { // this model has custom event
+            if ('Events' in obj) { // extend model events
                 Model = appModel.events(Model, obj.Events);
+            } else {
+                Model = appModel.events(Model);
             }
             return exports[moduleName] = Model;
         }

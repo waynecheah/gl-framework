@@ -20,9 +20,9 @@ var parse    = require('co-body');
 var config   = require('../../config');
 var log      = require('../../lib/log');
 
-var webPort = config.webPort ? ':'+config.webPort : '';
-var host    = 'http://localhost'+webPort;
-var Post    = mongoose.model('Post');
+var webPort  = config.webPort ? ':'+config.webPort : '';
+var host     = 'http://localhost'+webPort;
+var Post     = mongoose.model('Post');
 
 
 var Posts = {
@@ -34,14 +34,15 @@ var Posts = {
 
     list: function *() {
         var posts = function(cb){
-            Post.find({}, function(err, doc){
+            Post.find({}, '-__v', function(err, doc){
                 cb(err, doc);
             });
         };
         this.body = yield posts;
     }, // list
 
-    fetch: function *(id) {
+    fetch: function *(next) {
+        log('d', 'd', this.params.id);
         var post = function(cb){
             Post.fetch(id, function(err, doc){
                 cb(err, doc);
@@ -65,18 +66,23 @@ var Posts = {
         this.body = yield create;
     }, // create
 
-    save: function *(id) {
-//        this.set('Access-Control-Allow-Origin', host);
-//        this.set('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-
+    save: function *() {
         var post = yield parse(this);
-    
-        this.body = post;
+        var save = function(cb){
+            Post.updateRec(this.params.id, post, cb);
+        }
+        this.body = yield save;
     }, // save
     
-    remove: function *(id) {
-        var post = yield parse(this);
-        this.body = post;
+    remove: function *() {
+        var id  = this.params.id;
+        var del = function(cb){
+            Post.findByIdAndRemove(id, function(err, doc){
+                log('d', 'd', doc);
+                cb(err, doc);
+            });
+        };
+        this.body = yield del;
     } // remove
 };
 
@@ -85,7 +91,7 @@ Posts.routes =  [
     { route:'/post', fn:Posts.list },
     { route:'/post/:id', fn:Posts.fetch },
     { method:'post', route:'/post', fn:Posts.create },
-    { method:'put', route:'/post:id', fn:Posts.save },
+    { method:'put', route:'/post/:id', fn:Posts.save },
     { method:'delete', route:'/post/:id', fn:Posts.remove },
     { method:'options', route:'/post' },
     { method:'options', route:'/post/:id' }
